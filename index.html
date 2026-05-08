@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beekoala — デザインサンプル一覧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0C0C10;
+    color: #E8DEC8;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .band-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 10vw, 96px);
+    letter-spacing: 0.15em;
+    color: #F5F1E8;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .band-name span { color: #B8933F; }
+
+  .subtitle {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #B8933F;
+    margin-bottom: 8px;
+  }
+
+  .desc {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: rgba(232,222,200,0.45);
+    margin-top: 16px;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: #B8933F;
+    margin: 24px auto 0;
+    opacity: 0.5;
+  }
+
+  .samples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 960px;
+  }
+
+  .sample-card {
+    display: flex;
+    flex-direction: column;
+    background: #111118;
+    border: 1px solid rgba(184,147,63,0.15);
+    text-decoration: none;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    position: relative;
+  }
+
+  .sample-card:hover {
+    border-color: rgba(184,147,63,0.5);
+    transform: translateY(-3px);
+  }
+
+  .card-swatch {
+    height: 8px;
+    flex-shrink: 0;
+  }
+
+  .card-body {
+    padding: 28px 28px 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-num {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(184,147,63,0.6);
+    margin-bottom: 10px;
+  }
+
+  .card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    color: #F5F1E8;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid rgba(232,222,200,0.12);
+    color: rgba(232,222,200,0.45);
+    border-radius: 2px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    color: rgba(232,222,200,0.5);
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+    flex: 1;
+    margin-bottom: 24px;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #B8933F;
+    font-weight: 500;
+  }
+
+  .card-link::after { content: '→'; }
+
+  /* Swatch colors per theme */
+  .s1 .card-swatch { background: linear-gradient(to right, #080808, #C8FF00 50%, #080808); }
+  .s2 .card-swatch { background: linear-gradient(to right, #050508, #FF0066 30%, #00FFCC 70%, #050508); }
+  .s3 .card-swatch { background: linear-gradient(to right, #0E0A06, #C41E3A 50%, #0E0A06); }
+  .s4 .card-swatch { background: linear-gradient(to right, #000, #FDEE00 50%, #000); }
+  .s5 .card-swatch { background: linear-gradient(to right, #0C0C10, #B8933F 50%, #0C0C10); }
+
+  .footer-note {
+    margin-top: 48px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(232,222,200,0.2);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="subtitle">Design Samples</div>
+  <h1 class="band-name">BEE<span>KOALA</span></h1>
+  <div class="divider"></div>
+  <p class="desc">5つのデザインテーマをお選びください / Choose your favourite design</p>
+</div>
+
+<div class="samples-grid">
+
+  <a href="./sample1.html" class="sample-card s1">
+    <div class="card-swatch"></div>
+    <div class="card-body">
+      <div class="card-num">Sample 01</div>
+      <div class="card-name">Dark Minimal</div>
+      <div class="card-tags">
+        <span class="tag">Syne</span>
+        <span class="tag">DM Sans</span>
+        <span class="tag">Electric Lime</span>
+      </div>
+      <p class="card-desc">漆黒の背景にエレクトリックライムのアクセント。カスタムカーソルとスムースなスクロールリビールが特徴のミニマル系。</p>
+      <span class="card-link">このデザインを見る</span>
+    </div>
+  </a>
+
+  <a href="./sample2.html" class="sample-card s2">
+    <div class="card-swatch"></div>
+    <div class="card-body">
+      <div class="card-num">Sample 02</div>
+      <div class="card-name">Cyberpunk</div>
+      <div class="card-tags">
+        <span class="tag">Orbitron</span>
+        <span class="tag">Share Tech Mono</span>
+        <span class="tag">Neon</span>
+      </div>
+      <p class="card-desc">ピンク×シアンのネオン、スキャンラインオーバーレイ、グリッチエフェクト。SF的な未来感とエッジの効いた世界観。</p>
+      <span class="card-link">このデザインを見る</span>
+    </div>
+  </a>
+
+  <a href="./sample3.html" class="sample-card s3">
+    <div class="card-swatch"></div>
+    <div class="card-body">
+      <div class="card-num">Sample 03</div>
+      <div class="card-name">Grunge Rock</div>
+      <div class="card-tags">
+        <span class="tag">Bebas Neue</span>
+        <span class="tag">Crimson Text</span>
+        <span class="tag">Blood Red</span>
+      </div>
+      <p class="card-desc">ダークブラウン×ブラッドレッドのグランジ。フィルムグレインとスクラッチライン、ドロップキャップで荒削りな質感を演出。</p>
+      <span class="card-link">このデザインを見る</span>
+    </div>
+  </a>
+
+  <a href="./sample4.html" class="sample-card s4">
+    <div class="card-swatch"></div>
+    <div class="card-body">
+      <div class="card-num">Sample 04</div>
+      <div class="card-name">Modern Brutalism</div>
+      <div class="card-tags">
+        <span class="tag">Black Han Sans</span>
+        <span class="tag">Space Mono</span>
+        <span class="tag">Yellow</span>
+      </div>
+      <p class="card-desc">白黒×イエローの太ボーダーグリッド。情報を剥き出しにするブルータリズム。圧倒的な存在感と視認性。</p>
+      <span class="card-link">このデザインを見る</span>
+    </div>
+  </a>
+
+  <a href="./sample5.html" class="sample-card s5">
+    <div class="card-swatch"></div>
+    <div class="card-body">
+      <div class="card-num">Sample 05</div>
+      <div class="card-name">Elegant Dark</div>
+      <div class="card-tags">
+        <span class="tag">Cormorant Garamond</span>
+        <span class="tag">Raleway</span>
+        <span class="tag">Gold</span>
+      </div>
+      <p class="card-desc">アンティークゴールドとネイビーブラック。ゴールドのオーナメント装飾と優雅なタイポグラフィで格調高い世界観を表現。</p>
+      <span class="card-link">このデザインを見る</span>
+    </div>
+  </a>
+
+</div>
+
+<p class="footer-note">&copy; 2026 Beekoala — Internal Design Review</p>
+
+</body>
+</html>
