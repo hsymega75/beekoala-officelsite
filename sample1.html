@@ -174,14 +174,92 @@
     .social a:hover { color:var(--accent); }
     .social-tiktok { display:flex; align-items:center; gap:.35rem; }
 
+    /* ── Hamburger button ── */
+    .ham-btn {
+      display:none;
+      background:none; border:1px solid var(--accent); color:var(--accent);
+      font-size:1.3rem; line-height:1; padding:.35rem .65rem;
+      cursor:pointer; font-family:var(--fb); letter-spacing:0;
+      transition:background .2s, color .2s;
+    }
+    .ham-btn:hover { background:var(--accent); color:#080808; }
+
+    /* Mobile dropdown nav */
+    .nav-dropdown {
+      display:none; flex-direction:column; gap:0;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--bg2); border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border); z-index:199;
+    }
+    .nav-dropdown a {
+      display:block; padding:1rem 1.5rem;
+      color:var(--muted); text-decoration:none; font-size:.8rem;
+      letter-spacing:.12em; text-transform:uppercase; font-weight:500;
+      border-bottom:1px solid var(--border); transition:color .2s, background .2s;
+      cursor:pointer;
+    }
+    .nav-dropdown a:last-child { border-bottom:none; }
+    .nav-dropdown a:hover { color:var(--accent); background:rgba(200,255,0,.04); }
+    .nav-dropdown .nav-tiktok {
+      display:flex; align-items:center; gap:.5rem;
+      width:100%; border:none; padding:1rem 1.5rem;
+      border-bottom:1px solid var(--border);
+    }
+    nav.open .nav-dropdown { display:flex; }
+
     @media (max-width:900px) {
-      header { padding:1.5rem; }
-      nav a { display:none; }
-      .hero { padding:0 1.5rem 4rem; }
-      .section { padding:5rem 1.5rem; }
-      #about .grid { grid-template-columns:1fr; gap:3rem; }
-      .live-grid { grid-template-columns:1fr; gap:3rem; }
-      footer { flex-direction:column; gap:1.5rem; padding:2.5rem 1.5rem; }
+      /* Header */
+      header { padding:1rem 1.25rem; position:relative; flex-wrap:wrap; }
+
+      /* Hide inline nav links; show hamburger */
+      nav { position:static; }
+      nav > a, nav > .nav-tiktok { display:none; }
+      .ham-btn { display:block; }
+
+      /* Hero */
+      .hero { padding:0 1.25rem 3rem; min-height:520px; }
+      .hero-title { font-size:clamp(3.5rem,18vw,6rem); }
+      .hero-copy { font-size:clamp(.9rem,4vw,1.1rem); }
+      .hero-cta { flex-wrap:wrap; gap:.75rem; }
+      .hero-cta .btn { flex:1 1 auto; text-align:center; }
+
+      /* Sections */
+      .section { padding:4rem 1.25rem; }
+
+      /* About grid → single column */
+      #about .grid { grid-template-columns:1fr; gap:2.5rem; }
+
+      /* Stats → single column on phones */
+      .stats { grid-template-columns:1fr 1fr; }
+
+      /* Live grid → single column */
+      .live-grid { grid-template-columns:1fr; gap:2.5rem; }
+
+      /* Images */
+      .archive-img img, .hero-bg img { max-width:100%; width:100%; height:auto; }
+
+      /* Buttons */
+      .btn { display:block; width:100%; text-align:center; }
+      .event-card .btn { width:auto; display:inline-block; }
+
+      /* Footer */
+      footer { flex-direction:column; align-items:center; text-align:center; gap:1.25rem; padding:2rem 1.25rem; }
+      .social { flex-wrap:wrap; justify-content:center; gap:1rem; }
+    }
+
+    @media (max-width:768px) {
+      /* Custom cursor: hide on touch devices */
+      #cur, #cur-r { display:none; }
+      body { cursor:auto; }
+      .logo, nav a, .nav-tiktok, .btn, .social a { cursor:pointer; }
+
+      /* Tighter hero on phones */
+      .hero { padding:0 1rem 2.5rem; }
+      .hero-title { font-size:clamp(3rem,16vw,5rem); }
+
+      /* Stats 2-col stays fine on phones */
+      .stat:nth-child(odd) { padding-right:1rem; }
+      .stat:nth-child(even) { padding-left:1rem; }
     }
   </style>
 </head>
@@ -193,13 +271,23 @@
 <!-- ══ HEADER ══ -->
 <header>
   <a class="logo" href="#">BEEKOALA</a>
-  <nav>
+  <nav id="main-nav">
     <a href="#about">バンドについて</a>
     <a href="#live">ライブ情報</a>
     <a href="#contact">お問い合わせ</a>
     <a class="nav-tiktok" href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener" aria-label="TikTok">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/></svg>
     </a>
+    <button class="ham-btn" id="ham-btn" aria-label="メニューを開く" aria-expanded="false">&#9776;</button>
+    <div class="nav-dropdown" id="nav-dropdown">
+      <a href="#about" class="dropdown-link">バンドについて</a>
+      <a href="#live" class="dropdown-link">ライブ情報</a>
+      <a href="#contact" class="dropdown-link">お問い合わせ</a>
+      <a class="nav-tiktok dropdown-link" href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/></svg>
+        TikTok
+      </a>
+    </div>
   </nav>
 </header>
 
@@ -299,10 +387,30 @@
 </footer>
 
 <script>
+  /* Custom cursor (desktop only) */
   const cur = document.getElementById('cur'), r = document.getElementById('cur-r');
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
   (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);})();
+
+  /* Hamburger menu */
+  const hamBtn = document.getElementById('ham-btn');
+  const mainNav = document.getElementById('main-nav');
+  hamBtn.addEventListener('click', function() {
+    const isOpen = mainNav.classList.toggle('open');
+    hamBtn.setAttribute('aria-expanded', isOpen);
+    hamBtn.textContent = isOpen ? '✕' : '☰';
+  });
+  /* Close menu when a dropdown link is clicked */
+  document.querySelectorAll('.dropdown-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mainNav.classList.remove('open');
+      hamBtn.setAttribute('aria-expanded', 'false');
+      hamBtn.textContent = '☰';
+    });
+  });
+
+  /* Scroll reveal */
   const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>

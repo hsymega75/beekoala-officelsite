@@ -169,13 +169,94 @@
     .social a:hover { color:var(--cyan); text-shadow:0 0 8px rgba(0,255,204,.5); }
     .soc-tiktok { display:flex; align-items:center; gap:.3rem; }
 
+    /* ── Hamburger button (cyber style) ── */
+    .ham-btn {
+      display:none;
+      background:none; border:1px solid var(--cyan); color:var(--cyan);
+      font-family:var(--fh); font-size:.58rem; font-weight:700;
+      letter-spacing:.18em; text-transform:uppercase;
+      padding:.45rem .8rem; cursor:pointer;
+      text-shadow:0 0 8px rgba(0,255,204,.5);
+      box-shadow:0 0 8px rgba(0,255,204,.15);
+      transition:background .2s, box-shadow .2s;
+    }
+    .ham-btn:hover { background:rgba(0,255,204,.1); box-shadow:0 0 18px rgba(0,255,204,.35); }
+
+    /* Mobile dropdown nav */
+    .nav-dropdown {
+      display:none; flex-direction:column; gap:0;
+      position:absolute; top:100%; left:0; right:0;
+      background:rgba(5,5,8,.97);
+      border-top:1px solid rgba(0,255,204,.2);
+      border-bottom:1px solid rgba(0,255,204,.2);
+      z-index:499;
+      backdrop-filter:blur(8px);
+    }
+    .nav-dropdown a {
+      display:block; padding:.9rem 1.5rem;
+      color:var(--dim); text-decoration:none; font-family:var(--fh);
+      font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; font-weight:600;
+      border-bottom:1px solid rgba(0,255,204,.08);
+      transition:color .2s, background .2s, text-shadow .2s;
+    }
+    .nav-dropdown a::before { content:'> '; color:var(--pink); opacity:0; transition:opacity .2s; }
+    .nav-dropdown a:last-child { border-bottom:none; }
+    .nav-dropdown a:hover { color:var(--cyan); background:rgba(0,255,204,.04); text-shadow:0 0 10px rgba(0,255,204,.4); }
+    .nav-dropdown a:hover::before { opacity:1; }
+    .nav-dropdown .nav-tiktok {
+      display:flex; align-items:center; gap:.4rem;
+      border:none; padding:.9rem 1.5rem;
+      border-bottom:1px solid rgba(0,255,204,.08);
+      color:var(--yel); text-shadow:none;
+    }
+    .nav-dropdown .nav-tiktok:hover { color:var(--yel); }
+    nav.open .nav-dropdown { display:flex; }
+
     @media (max-width:900px) {
-      header { padding:1.25rem 1.5rem; }
-      nav a { display:none; }
-      .hero-content { padding:0 1.5rem; }
-      .section { padding:5rem 1.5rem; }
-      #about .grid, .live-cols { grid-template-columns:1fr; gap:2.5rem; }
-      footer { flex-direction:column; gap:1.25rem; }
+      /* Header */
+      header { padding:1rem 1.25rem; position:relative; flex-wrap:wrap; }
+
+      /* Hide inline nav links; show hamburger */
+      nav > a, nav > .nav-tiktok { display:none; }
+      .ham-btn { display:block; }
+
+      /* Hero */
+      .hero-content { padding:0 1.25rem; max-width:100%; }
+      .hero-title { font-size:clamp(2.8rem,15vw,5rem); }
+      .glitch-wrap::before, .glitch-wrap::after { font-size:clamp(2.8rem,15vw,5rem); }
+      .hero-btns { flex-wrap:wrap; gap:.75rem; }
+      .btn-cp { flex:1 1 auto; text-align:center; }
+
+      /* Sections */
+      .section { padding:4rem 1.25rem; }
+
+      /* About grid → single column */
+      #about .grid { grid-template-columns:1fr; gap:2.5rem; }
+
+      /* Stats 2-col: stays fine */
+      .stats-box { grid-template-columns:1fr 1fr; }
+
+      /* Live → single column */
+      .live-cols { grid-template-columns:1fr; gap:2.5rem; }
+
+      /* Images */
+      .arc-img img, .hero-bg img { max-width:100%; width:100%; height:auto; }
+
+      /* Footer */
+      footer { flex-direction:column; align-items:center; text-align:center; gap:1.25rem; padding:2rem 1.25rem; }
+      .social { flex-wrap:wrap; justify-content:center; gap:1rem; }
+    }
+
+    @media (max-width:768px) {
+      /* Even tighter hero on small phones */
+      .hero-content { padding:0 1rem; }
+      .hero-title { font-size:clamp(2.5rem,13vw,4rem); }
+      .glitch-wrap::before, .glitch-wrap::after { font-size:clamp(2.5rem,13vw,4rem); }
+      .hero-tag { font-size:.52rem; }
+
+      /* Buttons full-width on small phones */
+      .btn-cp { display:block; width:100%; text-align:center; }
+      .btn-ev { display:block; width:100%; text-align:center; }
     }
   </style>
 </head>
@@ -183,7 +264,7 @@
 
 <header>
   <a class="logo" href="#">BEEKOALA</a>
-  <nav>
+  <nav id="main-nav">
     <a href="#about">バンドについて</a>
     <a href="#live">ライブ情報</a>
     <a href="#contact">お問い合わせ</a>
@@ -191,6 +272,16 @@
       <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/></svg>
       TikTok
     </a>
+    <button class="ham-btn" id="ham-btn" aria-label="メニューを開く" aria-expanded="false">[ &#9776; MENU ]</button>
+    <div class="nav-dropdown" id="nav-dropdown">
+      <a href="#about" class="dropdown-link">バンドについて</a>
+      <a href="#live" class="dropdown-link">ライブ情報</a>
+      <a href="#contact" class="dropdown-link">お問い合わせ</a>
+      <a class="nav-tiktok dropdown-link" href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/></svg>
+        TikTok
+      </a>
+    </div>
   </nav>
 </header>
 
@@ -278,6 +369,24 @@
 </footer>
 
 <script>
+  /* Hamburger menu */
+  const hamBtn = document.getElementById('ham-btn');
+  const mainNav = document.getElementById('main-nav');
+  hamBtn.addEventListener('click', function() {
+    const isOpen = mainNav.classList.toggle('open');
+    hamBtn.setAttribute('aria-expanded', isOpen);
+    hamBtn.textContent = isOpen ? '[ ✕ CLOSE ]' : '[ ☰ MENU ]';
+  });
+  /* Close menu when a dropdown link is clicked */
+  document.querySelectorAll('.dropdown-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mainNav.classList.remove('open');
+      hamBtn.setAttribute('aria-expanded', 'false');
+      hamBtn.textContent = '[ ☰ MENU ]';
+    });
+  });
+
+  /* Scroll reveal */
   const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
