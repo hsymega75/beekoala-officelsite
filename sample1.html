@@ -83,7 +83,7 @@
       top-band.jpg: 推奨 1920×1080px（16:9）、バンド全員の集合写真
       横位置、インパクトのある構図
     */
-    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 25%; filter:brightness(.3) grayscale(35%); }
+    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 25%; }
     .hero-bg::after {
       content:''; position:absolute; inset:0;
       background:linear-gradient(to top, var(--bg) 0%, rgba(8,8,8,.5) 50%, transparent 100%);
@@ -154,8 +154,8 @@
       live-archive.jpg: 推奨 800×500px（16:9）、ライブ当日の写真
     */
     .archive-img { width:100%; aspect-ratio:16/9; overflow:hidden; }
-    .archive-img img { width:100%; height:100%; object-fit:cover; filter:brightness(.7) grayscale(20%); transition:filter .4s; }
-    .archive-card:hover .archive-img img { filter:brightness(.85) grayscale(0%); }
+    .archive-img img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+    .archive-card:hover .archive-img img { transform:scale(1.03); }
     .archive-info { padding:1.75rem; }
     .archive-date { font-size:.75rem; color:var(--muted); letter-spacing:.1em; margin-bottom:.5rem; }
     .archive-title { font-family:var(--fh); font-size:1.1rem; font-weight:700; margin-bottom:.35rem; }
@@ -253,9 +253,15 @@
       body { cursor:auto; }
       .logo, nav a, .nav-tiktok, .btn, .social a { cursor:pointer; }
 
-      /* Tighter hero on phones */
-      .hero { padding:0 1rem 2.5rem; }
-      .hero-title { font-size:clamp(3rem,16vw,5rem); }
+      /* Hero: stack image above content on mobile */
+      .hero { height:auto; min-height:unset; flex-direction:column; padding:0 !important; overflow:visible; }
+      .hero-bg { position:relative; height:auto; }
+      .hero-bg img { position:relative; width:100%; height:auto; object-fit:contain; }
+      .hero-bg::after { display:none; }
+      .hero-content { position:relative; z-index:2; padding:1.5rem 1.25rem 2.5rem !important; }
+      .hero-title { font-size:9vw !important; }
+      .hero-copy { font-size:.9rem; }
+      .hero-cta { flex-wrap:wrap; gap:.6rem; }
 
       /* Stats 2-col stays fine on phones */
       .stat:nth-child(odd) { padding-right:1rem; }

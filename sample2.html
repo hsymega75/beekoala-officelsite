@@ -77,7 +77,7 @@
     /*
       top-band.jpg: 推奨 1920×1080px（16:9）、ドラマチックな照明
     */
-    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center; filter:brightness(.22) saturate(1.4) hue-rotate(200deg); }
+    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center; }
     .hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,0,102,.1) 0%,transparent 50%),linear-gradient(to right,rgba(5,5,8,.92) 0%,rgba(5,5,8,.25) 100%); }
 
     .hero::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:100px; background:var(--bg); clip-path:polygon(0 100%,100% 0,100% 100%); z-index:2; }
@@ -153,8 +153,8 @@
       live-archive.jpg: 推奨 800×500px（16:9）
     */
     .arc-img { width:100%; aspect-ratio:16/9; overflow:hidden; position:relative; }
-    .arc-img img { width:100%; height:100%; object-fit:cover; filter:brightness(.55) saturate(.8) hue-rotate(200deg); transition:filter .4s; }
-    .archive-card:hover .arc-img img { filter:brightness(.75) saturate(1.2) hue-rotate(180deg); }
+    .arc-img img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+    .archive-card:hover .arc-img img { transform:scale(1.03); }
     .arc-info { padding:1.5rem; }
     .arc-date { font-family:var(--fh); font-size:.65rem; color:var(--yel); letter-spacing:.1em; margin-bottom:.5rem; }
     .arc-title { font-family:var(--fh); font-size:.88rem; font-weight:700; letter-spacing:.04em; margin-bottom:.35rem; }
@@ -248,10 +248,15 @@
     }
 
     @media (max-width:768px) {
-      /* Even tighter hero on small phones */
-      .hero-content { padding:0 1rem; }
-      .hero-title { font-size:clamp(2.5rem,13vw,4rem); }
-      .glitch-wrap::before, .glitch-wrap::after { font-size:clamp(2.5rem,13vw,4rem); }
+      /* Hero: stack image above content on mobile */
+      .hero { height:auto; min-height:unset; flex-direction:column; }
+      .hero-bg { position:relative; height:auto; }
+      .hero-bg img { position:relative; width:100%; height:auto; object-fit:contain; }
+      .hero-bg::after { display:none; }
+      .hero::after { display:none; }
+      .hero-content { position:relative; z-index:3; padding:1.5rem 1rem 2.5rem !important; }
+      .hero-title { font-size:9vw !important; }
+      .glitch-wrap::before, .glitch-wrap::after { font-size:9vw !important; }
       .hero-tag { font-size:.52rem; }
 
       /* Buttons full-width on small phones */
