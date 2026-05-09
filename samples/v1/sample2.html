@@ -52,8 +52,8 @@
       backdrop-filter:blur(8px);
     }
 
-    .logo { text-decoration:none; font-family:var(--fh); font-size:1rem; font-weight:900; color:var(--cyan); letter-spacing:.1em; text-shadow:0 0 18px rgba(0,255,204,.6); animation:flicker 9s infinite; }
-    .logo::before { content:'// '; color:var(--pink); font-size:.85em; text-shadow:0 0 10px var(--pink); }
+    .logo { text-decoration:none; display:flex; align-items:center; }
+    .round-logo { border-radius:50%; object-fit:cover; width:52px; height:52px; border:2px solid var(--cyan); box-shadow:0 0 16px rgba(0,255,204,.4); display:block; }
 
     nav { display:flex; gap:2rem; align-items:center; }
     nav a { color:var(--dim); text-decoration:none; font-family:var(--fh); font-size:.58rem; letter-spacing:.18em; text-transform:uppercase; font-weight:600; transition:color .2s, text-shadow .2s; }
@@ -268,7 +268,7 @@
 <body>
 
 <header>
-  <a class="logo" href="#">BEEKOALA</a>
+  <a class="logo" href="#"><img src="../../images/logo-round-en.png" alt="BEEKOALA" class="round-logo"></a>
   <nav id="main-nav">
     <a href="#about">バンドについて</a>
     <a href="#live">ライブ情報</a>
