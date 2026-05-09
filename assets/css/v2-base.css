@@ -29,6 +29,20 @@ img { max-width: 100%; display: block; }
 /* ── No filters on photos ── */
 img { filter: none !important; -webkit-filter: none !important; }
 
+/* ── Logo containment ── */
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.logo-wrap img {
+  max-width: 100%;
+  width: 160px;
+  height: auto;
+}
+
 /* ── YouTube responsive wrapper ── */
 .video-wrapper {
   position: relative;
