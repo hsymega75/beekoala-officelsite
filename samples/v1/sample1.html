@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beekoala — Dark Minimal</title>
+  <!--
+    SAMPLE 1: DARK MINIMAL
+    Theme: Surgical precision — electric lime on deep black
+    Fonts: Syne (display) + DM Sans (body)
+    Accent: #C8FF00 Electric Lime
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #080808;
+      --bg2:    #111111;
+      --fg:     #F5F5F5;
+      --muted:  #606060;
+      --accent: #C8FF00;
+      --border: #1E1E1E;
+      --fh:     'Syne', sans-serif;
+      --fb:     'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--fb);
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* ── Cursor ── */
+    #cur { position:fixed; width:10px; height:10px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+    #cur-r { position:fixed; width:34px; height:34px; border:1px solid rgba(200,255,0,.3); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); }
+
+    /* ── Header ── */
+    header {
+      position: fixed; top:0; left:0; right:0; z-index:200;
+      display: flex; align-items:center; justify-content:space-between;
+      padding: 1.75rem 3rem;
+    }
+
+    .logo { font-family:var(--fh); font-size:1.25rem; font-weight:800; color:var(--fg); text-decoration:none; letter-spacing:-.02em; cursor:none; }
+
+    nav { display:flex; gap:2rem; align-items:center; }
+    nav a {
+      color:var(--muted); text-decoration:none; font-size:.75rem; letter-spacing:.14em;
+      text-transform:uppercase; font-weight:500; transition:color .25s; cursor:none;
+      position:relative;
+    }
+    nav a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--accent); transition:width .3s; }
+    nav a:hover { color:var(--fg); }
+    nav a:hover::after { width:100%; }
+
+    .nav-tiktok {
+      display:flex; align-items:center; justify-content:center;
+      width:34px; height:34px; border:1px solid var(--border);
+      color:var(--muted); transition:border-color .25s, color .25s; cursor:none;
+    }
+    .nav-tiktok:hover { border-color:var(--accent); color:var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      position:relative; height:100vh; min-height:680px;
+      display:flex; align-items:flex-end; padding:0 3rem 5rem;
+      overflow:hidden;
+    }
+
+    .hero-bg { position:absolute; inset:0; }
+    /*
+      top-band.jpg: 推奨 1920×1080px（16:9）、バンド全員の集合写真
+      横位置、インパクトのある構図
+    */
+    .hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 25%; }
+    .hero-bg::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to top, var(--bg) 0%, rgba(8,8,8,.5) 50%, transparent 100%);
+    }
+
+    .hero-content { position:relative; z-index:2; }
+    .hero-year { font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--accent); font-weight:500; margin-bottom:1rem; }
+    .hero-title { font-family:var(--fh); font-size:clamp(5rem,14vw,16rem); font-weight:800; line-height:.88; letter-spacing:-.04em; margin-bottom:1.5rem; }
+    .hero-copy { font-size:clamp(1rem,2vw,1.5rem); font-weight:300; color:rgba(245,245,245,.6); margin-bottom:2.5rem; letter-spacing:.04em; }
+    .hero-copy strong { color:var(--fg); font-weight:400; }
+
+    .hero-cta { display:flex; gap:1.25rem; }
+    .btn { display:inline-block; padding:.85rem 2.25rem; font-family:var(--fb); font-size:.78rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; cursor:none; transition:all .25s; }
+    .btn-solid { background:var(--accent); color:#080808; }
+    .btn-solid:hover { background:#fff; }
+    .btn-outline { background:transparent; color:var(--fg); border:1px solid var(--border); }
+    .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+
+    /* ── Rule ── */
+    .rule { width:100%; height:1px; background:var(--border); }
+
+    /* ── Sections ── */
+    .section { max-width:1360px; margin:0 auto; padding:7rem 3rem; }
+
+    .s-label { font-size:.68rem; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); font-weight:500; margin-bottom:.75rem; }
+    h2 { font-family:var(--fh); font-size:clamp(2.5rem,5vw,5.5rem); font-weight:800; line-height:.95; letter-spacing:-.035em; margin-bottom:3.5rem; }
+
+    /* ── Reveal ── */
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity .9s ease, transform .9s ease; }
+    .reveal.in { opacity:1; transform:none; }
+    .d1 { transition-delay:.1s; }
+    .d2 { transition-delay:.2s; }
+
+    /* ── About ── */
+    #about .grid { display:grid; grid-template-columns:1fr 1fr; gap:7rem; align-items:start; }
+
+    .about-lead { font-size:clamp(1.2rem,2.2vw,1.55rem); font-weight:300; line-height:1.55; margin-bottom:1.75rem; }
+    .about-body { font-size:1rem; color:var(--muted); line-height:1.9; margin-bottom:1.25rem; }
+
+    .stats { display:grid; grid-template-columns:1fr 1fr; margin-top:3rem; }
+    .stat { border-top:1px solid var(--border); padding:1.5rem 0; }
+    .stat:nth-child(odd) { padding-right:2rem; }
+    .stat:nth-child(even) { border-left:1px solid var(--border); padding-left:2rem; }
+    .stat-n { font-family:var(--fh); font-size:3rem; font-weight:800; color:var(--accent); letter-spacing:-.04em; line-height:1; }
+    .stat-l { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; }
+
+    /* ── Live ── */
+    .live-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:4rem; }
+
+    /* Upcoming */
+    .upcoming-label { font-size:.68rem; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); font-weight:500; margin-bottom:1.5rem; }
+    .event-card {
+      border:1px solid var(--border); padding:2.5rem;
+      position:relative; overflow:hidden;
+    }
+    .event-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--accent); }
+    .event-date { font-family:var(--fh); font-size:clamp(1.8rem,3vw,2.8rem); font-weight:800; letter-spacing:-.02em; line-height:1; margin-bottom:1.5rem; color:var(--accent); }
+    .event-title { font-family:var(--fh); font-size:1.1rem; font-weight:700; margin-bottom:.5rem; }
+    .event-venue { font-size:.9rem; color:var(--muted); margin-bottom:.35rem; }
+    .event-time { font-size:.85rem; color:var(--muted); margin-bottom:.35rem; }
+    .event-price { font-size:.85rem; color:var(--muted); margin-bottom:2rem; }
+    .event-card .btn { margin-top:.5rem; }
+
+    /* Archive */
+    .archive-label { font-size:.68rem; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); font-weight:500; margin-bottom:1.5rem; }
+    .archive-card { border:1px solid var(--border); overflow:hidden; }
+    /*
+      live-archive.jpg: 推奨 800×500px（16:9）、ライブ当日の写真
+    */
+    .archive-img { width:100%; aspect-ratio:16/9; overflow:hidden; }
+    .archive-img img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+    .archive-card:hover .archive-img img { transform:scale(1.03); }
+    .archive-info { padding:1.75rem; }
+    .archive-date { font-size:.75rem; color:var(--muted); letter-spacing:.1em; margin-bottom:.5rem; }
+    .archive-title { font-family:var(--fh); font-size:1.1rem; font-weight:700; margin-bottom:.35rem; }
+    .archive-venue { font-size:.85rem; color:var(--muted); margin-bottom:.75rem; }
+    .archive-note { font-size:.9rem; color:var(--muted); line-height:1.7; }
+
+    /* ── Footer ── */
+    footer {
+      border-top:1px solid var(--border);
+      padding:2.5rem 3rem; display:flex; justify-content:space-between; align-items:center;
+      max-width:1360px; margin:0 auto;
+    }
+    footer p { font-size:.75rem; color:var(--muted); }
+    .social { display:flex; gap:1.5rem; align-items:center; }
+    .social a { color:var(--muted); text-decoration:none; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; transition:color .2s; cursor:none; }
+    .social a:hover { color:var(--accent); }
+    .social-tiktok { display:flex; align-items:center; gap:.35rem; }
+
+    /* ── Hamburger button ── */
+    .ham-btn {
+      display:none;
+      background:none; border:1px solid var(--accent); color:var(--accent);
+      font-size:1.3rem; line-height:1; padding:.35rem .65rem;
+      cursor:pointer; font-family:var(--fb); letter-spacing:0;
+      transition:background .2s, color .2s;
+    }
+    .ham-btn:hover { background:var(--accent); color:#080808; }
+
+    /* Mobile dropdown nav */
+    .nav-dropdown {
+      display:none; flex-direction:column; gap:0;
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--bg2); border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border); z-index:199;
+    }
+    .nav-dropdown a {
+      display:block; padding:1rem 1.5rem;
+      color:var(--muted); text-decoration:none; font-size:.8rem;
+      letter-spacing:.12em; text-transform:uppercase; font-weight:500;
+      border-bottom:1px solid var(--border); transition:color .2s, background .2s;
+      cursor:pointer;
+    }
+    .nav-dropdown a:last-child { border-bottom:none; }
+    .nav-dropdown a:hover { color:var(--accent); background:rgba(200,255,0,.04); }
+    .nav-dropdown .nav-tiktok {
+      display:flex; align-items:center; gap:.5rem;
+      width:100%; border:none; padding:1rem 1.5rem;
+      border-bottom:1px solid var(--border);
+    }
+    nav.open .nav-dropdown { display:flex; }
+
+    @media (max-width:900px) {
+      /* Header */
+      header { padding:1rem 1.25rem; position:relative; flex-wrap:wrap; }
+
+      /* Hide inline nav links; show hamburger */
+      nav { position:static; }
+      nav > a, nav > .nav-tiktok { display:none; }
+      .ham-btn { display:block; }
+
+      /* Hero */
+      .hero { padding:0 1.25rem 3rem; min-height:520px; }
+      .hero-title { font-size:clamp(3.5rem,18vw,6rem); }
+      .hero-copy { font-size:clamp(.9rem,4vw,1.1rem); }
+      .hero-cta { flex-wrap:wrap; gap:.75rem; }
+      .hero-cta .btn { flex:1 1 auto; text-align:center; }
+
+      /* Sections */
+      .section { padding:4rem 1.25rem; }
+
+      /* About grid → single column */
+      #about .grid { grid-template-columns:1fr; gap:2.5rem; }
+
+      /* Stats → single column on phones */
+      .stats { grid-template-columns:1fr 1fr; }
+
+      /* Live grid → single column */
+      .live-grid { grid-template-columns:1fr; gap:2.5rem; }
+
+      /* Images */
+      .archive-img img, .hero-bg img { max-width:100%; width:100%; height:auto; }
+
+      /* Buttons */
+      .btn { display:block; width:100%; text-align:center; }
+      .event-card .btn { width:auto; display:inline-block; }
+
+      /* Footer */
+      footer { flex-direction:column; align-items:center; text-align:center; gap:1.25rem; padding:2rem 1.25rem; }
+      .social { flex-wrap:wrap; justify-content:center; gap:1rem; }
+    }
+
+    @media (max-width:768px) {
+      /* Custom cursor: hide on touch devices */
+      #cur, #cur-r { display:none; }
+      body { cursor:auto; }
+      .logo, nav a, .nav-tiktok, .btn, .social a { cursor:pointer; }
+
+      /* Hero: stack image above content on mobile */
+      .hero { height:auto; min-height:unset; flex-direction:column; padding:0 !important; overflow:visible; }
+      .hero-bg { position:relative; height:auto; }
+      .hero-bg img { position:relative; width:100%; height:auto; object-fit:contain; }
+      .hero-bg::after { display:none; }
+      .hero-content { position:relative; z-index:2; padding:1.5rem 1.25rem 2.5rem !important; }
+      .hero-title { font-size:9vw !important; }
+      .hero-copy { font-size:.9rem; }
+      .hero-cta { flex-wrap:wrap; gap:.6rem; }
+
+      /* Stats 2-col stays fine on phones */
+      .stat:nth-child(odd) { padding-right:1rem; }
+      .stat:nth-child(even) { padding-left:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <a class="logo" href="#">BEEKOALA</a>
+  <nav id="main-nav">
+    <a href="#about">バンドについて</a>
+    <a href="#live">ライブ情報</a>
+    <a href="#contact">お問い合わせ</a>
+    <a class="nav-tiktok" href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/></svg>
+    </a>
+    <button class="ham-btn" id="ham-btn" aria-label="メニューを開く" aria-expanded="false">&#9776;</button>
+    <div class="nav-dropdown" id="nav-dropdown">
+      <a href="#about" class="dropdown-link">バンドについて</a>
+      <a href="#live" class="dropdown-link">ライブ情報</a>
+      <a href="#contact" class="dropdown-link">お問い合わせ</a>
+      <a class="nav-tiktok dropdown-link" href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/></svg>
+        TikTok
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <!-- top-band.jpg: 推奨 1920×1080px（16:9）、バンド集合写真 -->
+    <img src="../../images/top-band.jpg" alt="Beekoala">
+  </div>
+  <div class="hero-content">
+    <p class="hero-year">2026年 — 福岡から、再び。</p>
+    <h1 class="hero-title">BEEKOALA</h1>
+    <p class="hero-copy"><strong>20年ぶりの、再始動。</strong><br>あの頃の衝動が、今また動き出す。</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#live">ライブ情報を見る</a>
+      <a class="btn btn-outline" href="#about">バンドについて</a>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ══ ABOUT ══ -->
+<div class="section" id="about">
+  <div class="grid">
+    <div>
+      <p class="s-label reveal">バンドについて</p>
+      <h2 class="reveal d1">20年後の<br>再会</h2>
+    </div>
+    <div class="reveal d2">
+      <p class="about-lead">高校の同級生として出会い、音楽で繋がった仲間がいた。</p>
+      <p class="about-body">卒業と同時にバンドは静かに幕を閉じ、それぞれが別々の道を歩んだ。仕事、家族、移住——気づけば20年という時間が流れていた。</p>
+      <p class="about-body">ある日届いた一本のメッセージが、眠っていた衝動を叩き起こした。「また、やってみないか。」返事に時間はかからなかった。再始動の声に、新たな仲間も加わってくれた。あの頃には鳴らせなかった音を、一緒に鳴らすために。</p>
+      <p class="about-body">2026年、5人のBeekoalaは福岡から動き出す。20年分の重みと、新しい出会いを纏って。</p>
+      <div class="stats">
+        <div class="stat"><div class="stat-n">5</div><div class="stat-l">メンバー</div></div>
+        <div class="stat"><div class="stat-n">20</div><div class="stat-l">年の空白</div></div>
+        <div class="stat"><div class="stat-n">2026</div><div class="stat-l">再始動</div></div>
+        <div class="stat"><div class="stat-n">福岡</div><div class="stat-l">拠点</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rule"></div>
+
+<!-- ══ LIVE ══ -->
+<div class="section" id="live">
+  <p class="s-label reveal">ライブ情報</p>
+  <h2 class="reveal d1">ライブ</h2>
+
+  <div class="live-grid reveal d2">
+    <!-- Upcoming Live -->
+    <div>
+      <p class="upcoming-label">Upcoming Live</p>
+      <div class="event-card">
+        <div class="event-date">2026.07.18</div>
+        <div class="event-title">ライブタイトル入力</div>
+        <div class="event-venue">LIVE HOUSE DRUM Be-1／福岡市中央区大名</div>
+        <div class="event-time">OPEN 17:00 ／ START 18:00</div>
+        <div class="event-price">前売 ¥2,500 ／ 当日 ¥3,000（＋1drink）</div>
+        <a class="btn btn-solid" href="#">チケット購入</a>
+      </div>
+    </div>
+
+    <!-- Live Archive -->
+    <div>
+      <p class="archive-label">Live Archive</p>
+      <div class="archive-card">
+        <div class="archive-img">
+          <!-- live-archive.jpg: 推奨 800×500px（16:9）、ライブ当日の写真 -->
+          <img src="../../images/live-archive.jpg" alt="2026.07.18 BLIMIC of SOUND act.56">
+        </div>
+        <div class="archive-info">
+          <div class="archive-date">2026.07.18（土）</div>
+          <div class="archive-title">BLIMIC of SOUND act.56</div>
+          <div class="archive-venue">福岡Livehouse Dragoon ／ 福岡</div>
+          <p class="archive-quote">Cast<br>ハイファイコーヒーズ<br>THE GOOD ROOLS<br>心臓<br>ビーコアラ<br>envoy frm the silence</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer id="contact">
+  <p>© 2026 Beekoala. 無断転載禁止。</p>
+  <div class="social">
+    <a href="#">Instagram</a>
+    <a href="#">X / Twitter</a>
+    <a class="social-tiktok" href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/></svg>
+      TikTok
+    </a>
+    <a href="#">YouTube</a>
+  </div>
+</footer>
+
+<script>
+  /* Custom cursor (desktop only) */
+  const cur = document.getElementById('cur'), r = document.getElementById('cur-r');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+  (function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;r.style.left=rx+'px';r.style.top=ry+'px';requestAnimationFrame(loop);})();
+
+  /* Hamburger menu */
+  const hamBtn = document.getElementById('ham-btn');
+  const mainNav = document.getElementById('main-nav');
+  hamBtn.addEventListener('click', function() {
+    const isOpen = mainNav.classList.toggle('open');
+    hamBtn.setAttribute('aria-expanded', isOpen);
+    hamBtn.textContent = isOpen ? '✕' : '☰';
+  });
+  /* Close menu when a dropdown link is clicked */
+  document.querySelectorAll('.dropdown-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      mainNav.classList.remove('open');
+      hamBtn.setAttribute('aria-expanded', 'false');
+      hamBtn.textContent = '☰';
+    });
+  });
+
+  /* Scroll reveal */
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

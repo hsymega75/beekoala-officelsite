@@ -1,0 +1,884 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEEKOALA — Official</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0E0A06;
+    --bg2: #130C08;
+    --cream: #E8DEC8;
+    --cream2: #C9BFA9;
+    --red: #C41E3A;
+    --red2: #8B1020;
+    --accent: #D4A850;
+    --text: #D8CDB8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* Scratch lines */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 998;
+    background: repeating-linear-gradient(
+      87deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(232,222,200,0.012) 60px,
+      rgba(232,222,200,0.012) 61px
+    );
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: linear-gradient(to bottom, rgba(14,10,6,0.98) 0%, rgba(14,10,6,0) 100%);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.18em;
+    color: var(--cream);
+    text-decoration: none;
+    position: relative;
+  }
+
+  .nav-logo::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Special Elite', serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--cream2);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.25s;
+  }
+
+  .nav-links a:hover { color: var(--cream); }
+
+  .nav-tiktok {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--red);
+    padding: 6px 12px;
+    color: var(--cream) !important;
+    transition: background 0.25s !important;
+    font-size: 12px !important;
+  }
+
+  .nav-tiktok:hover {
+    background: var(--red) !important;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 80px;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    /* filter removed: show original photo */
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 35%,
+      rgba(14,10,6,0.5) 65%,
+      rgba(14,10,6,0.92) 85%,
+      var(--bg) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: var(--red);
+    z-index: 2;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 0 80px;
+    max-width: 900px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Special Elite', serif;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 4px 12px;
+    margin-bottom: 24px;
+    background: rgba(196,30,58,0.08);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: 0.03em;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  .hero-title span {
+    color: var(--red);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.5vw, 26px);
+    color: var(--cream2);
+    line-height: 1.5;
+    max-width: 520px;
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+  }
+
+  /* SECTION COMMON */
+  section {
+    padding: 120px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Special Elite', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    margin-bottom: 48px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--red), transparent 60%);
+    margin: 0 80px;
+  }
+
+  /* ABOUT */
+  #about { padding-top: 100px; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--cream2);
+    margin-bottom: 1.4em;
+  }
+
+  .about-text p:first-child {
+    font-size: 20px;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .about-text p:first-child::first-letter {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    line-height: 0.8;
+    float: left;
+    margin-right: 8px;
+    margin-top: 8px;
+    color: var(--red);
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .stat-block {
+    background: var(--bg2);
+    border: 1px solid rgba(232,222,200,0.06);
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
+
+  .stat-block:hover::before { transform: scaleX(1); }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'Special Elite', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    opacity: 0.7;
+  }
+
+  /* LIVE */
+  #live { padding-top: 100px; }
+
+  .live-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .upcoming-card {
+    background: var(--bg2);
+    border: 1px solid rgba(232,222,200,0.08);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .upcoming-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--red);
+  }
+
+  .upcoming-card::after {
+    content: 'NEXT';
+    position: absolute;
+    top: 20px; right: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--red);
+    border: 1px solid var(--red);
+    padding: 3px 8px;
+  }
+
+  .event-date-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .event-day-label {
+    font-family: 'Special Elite', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .event-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.05em;
+    color: var(--cream);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .event-detail {
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    color: var(--cream2);
+    margin-bottom: 8px;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .event-detail::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--red);
+  }
+
+  .ticket-btn {
+    display: inline-block;
+    margin-top: 32px;
+    font-family: 'Special Elite', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--red);
+    padding: 14px 32px;
+    text-decoration: none;
+    border: 2px solid var(--red);
+    transition: background 0.25s, color 0.25s;
+  }
+
+  .ticket-btn:hover {
+    background: transparent;
+    color: var(--red);
+  }
+
+  .archive-card {
+    background: var(--bg2);
+    border: 1px solid rgba(232,222,200,0.08);
+    overflow: hidden;
+  }
+
+  .archive-img-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .archive-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .archive-card:hover .archive-img-wrap img {
+    transform: scale(1.03);
+  }
+
+  .archive-label {
+    position: absolute;
+    top: 16px; left: 16px;
+    font-family: 'Special Elite', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream);
+    background: var(--red);
+    padding: 4px 10px;
+  }
+
+  .archive-info { padding: 32px 36px; }
+
+  .archive-date {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .archive-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .archive-venue {
+    font-size: 14px;
+    color: var(--cream2);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .archive-quote {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--cream2);
+    border-left: 2px solid var(--accent);
+    padding-left: 14px;
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  #contact { padding-top: 100px; padding-bottom: 60px; }
+
+  .contact-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .contact-left { flex: 1; }
+
+  .contact-text {
+    font-size: 17px;
+    color: var(--cream2);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 420px;
+  }
+
+  .contact-email {
+    font-family: 'Special Elite', serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid var(--red);
+    padding-bottom: 3px;
+    transition: color 0.25s;
+  }
+
+  .contact-email:hover { color: var(--red); }
+
+  .contact-right .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    line-height: 0.9;
+    letter-spacing: 0.05em;
+    color: var(--bg2);
+    -webkit-text-stroke: 1px rgba(232,222,200,0.12);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(232,222,200,0.1);
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    color: var(--cream2);
+  }
+
+  .footer-sns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-sns a {
+    font-family: 'Special Elite', serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.25s;
+  }
+
+  .footer-sns a:hover { color: var(--red); }
+
+  .footer-tiktok {
+    border: 1px solid rgba(196,30,58,0.4);
+    padding: 6px 12px;
+    transition: border-color 0.25s !important;
+  }
+
+  .footer-tiktok:hover { border-color: var(--red) !important; }
+
+  .footer-copy {
+    font-family: 'Special Elite', serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--cream2);
+    opacity: 0.4;
+    width: 100%;
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.22s; }
+  .reveal-delay-3 { transition-delay: 0.36s; }
+
+  /* HAMBURGER */
+  .ham-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--red);
+    color: var(--cream);
+    font-size: 22px;
+    line-height: 1;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-family: 'Special Elite', serif;
+    z-index: 110;
+  }
+
+  .nav-dropdown {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: var(--bg2);
+    border-top: 1px solid var(--red);
+    z-index: 105;
+    flex-direction: column;
+    padding: 8px 0;
+  }
+
+  .nav-dropdown.open { display: flex; }
+
+  .nav-dropdown a {
+    font-family: 'Special Elite', serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    text-decoration: none;
+    padding: 14px 28px;
+    border-bottom: 1px solid rgba(232,222,200,0.06);
+    transition: color 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-dropdown a:hover {
+    color: var(--cream);
+    background: rgba(196,30,58,0.12);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .ham-btn { display: block; }
+
+    section { padding: 60px 20px; }
+    .divider { margin: 0 20px; }
+
+    /* Hero: stack image above content on mobile */
+    .hero { height:auto; min-height:unset; flex-direction:column; padding:0; align-items:stretch; overflow:visible; }
+    .hero-img { position:relative; width:100%; height:auto; object-fit:contain; }
+    .hero::before, .hero::after { display:none; }
+    .hero-content { position:relative; z-index:3; padding:1.5rem 1.25rem 2.5rem; background:var(--bg); }
+    .hero-title { font-size:16vw; }
+    .hero-badge { margin-bottom:12px; }
+    .hero-sub { font-size:1rem; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-stats { margin-top: 0; }
+    .live-grid { grid-template-columns: 1fr; gap: 32px; }
+    .archive-card { margin-top: 0; }
+    .contact-wrap { flex-direction: column; gap: 32px; }
+    .contact-right { display: none; }
+
+    .upcoming-card { padding: 32px 24px; }
+    .archive-info { padding: 24px 20px; }
+
+    .ticket-btn { display: block; text-align: center; }
+
+    footer {
+      padding: 28px 20px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-sns { flex-wrap: wrap; justify-content: center; }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    section { padding: 80px 24px; }
+    .divider { margin: 0 24px; }
+    .hero-content { padding: 0 24px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-stats { margin-top: 40px; }
+    .live-grid { grid-template-columns: 1fr; }
+    .archive-card { margin-top: 0; }
+    .contact-wrap { flex-direction: column; }
+    .contact-right { display: none; }
+    footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Beekoala</a>
+  <ul class="nav-links">
+    <li><a href="#about">バンドについて</a></li>
+    <li><a href="#live">ライブ情報</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+    <li>
+      <a href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener" class="nav-tiktok">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/>
+        </svg>
+        TikTok
+      </a>
+    </li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" aria-label="メニューを開く">&#9776;</button>
+</nav>
+<div class="nav-dropdown" id="nav-dropdown">
+  <a href="#about">バンドについて</a>
+  <a href="#live">ライブ情報</a>
+  <a href="#contact">お問い合わせ</a>
+  <a href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/>
+    </svg>
+    TikTok
+  </a>
+</div>
+
+<section class="hero" id="home">
+  <img src="../../images/top-band.jpg" alt="Beekoala バンド写真" class="hero-img">
+  <div class="hero-content">
+    <div class="hero-badge">Fukuoka 2026 — Reborn</div>
+    <h1 class="hero-title">
+      BEE<span>KOALA</span>
+    </h1>
+    <p class="hero-sub">20年ぶりの再始動。あの衝動は、まだ死んでいなかった。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="about">
+  <div class="section-label">Our Story</div>
+  <h2 class="section-title">バンドについて</h2>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>高校の同級生として出会い、音楽で繋がった仲間がいた。卒業と同時にバンドは静かに幕を閉じ、それぞれが別々の道を歩んだ。仕事、家族、移住——気づけば20年という時間が流れていた。</p>
+      <p>ある日届いた一本のメッセージが、眠っていた衝動を叩き起こした。「また、やってみないか。」返事に時間はかからなかった。再始動の声に、新たな仲間も加わった。あの頃には鳴らせなかった音を、一緒に鳴らすために——2026年、5人のBeekoalaが福岡から動き出す。</p>
+    </div>
+
+    <div class="about-stats reveal reveal-delay-2">
+      <div class="stat-block">
+        <div class="stat-num">5</div>
+        <div class="stat-label">メンバー</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">20</div>
+        <div class="stat-label">年の空白</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">2026</div>
+        <div class="stat-label">再始動の年</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">福岡</div>
+        <div class="stat-label">拠点</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="live">
+  <div class="section-label">Live Information</div>
+  <h2 class="section-title">ライブ情報</h2>
+
+  <div class="live-grid">
+    <div class="upcoming-card reveal">
+      <div class="event-date-big">2026.07.18</div>
+      <div class="event-day-label">Sunday — Upcoming Live</div>
+      <div class="event-name">ライブタイトル入力</div>
+      <div class="event-detail">LIVE HOUSE DRUM Be-1 ／ 福岡市中央区大名</div>
+      <div class="event-detail">OPEN 17:00 ／ START 18:00</div>
+      <div class="event-detail">前売 ¥2,500 ／ 当日 ¥3,000（+1drink）</div>
+      <a href="#" class="ticket-btn">チケットを購入</a>
+    </div>
+
+    <div class="archive-card reveal reveal-delay-2">
+      <div class="archive-img-wrap">
+        <img src="../../images/live-archive.jpg" alt="ライブアーカイブ写真">
+        <span class="archive-label">Live Archive</span>
+      </div>
+      <div class="archive-info">
+        <div class="archive-date">2026.07.18 (SAT)</div>
+        <div class="archive-title">BLIMIC of SOUND act.56</div>
+        <div class="archive-venue">福岡Livehouse Dragoon ／ 福岡</div>
+        <p class="archive-quote">Cast<br>ハイファイコーヒーズ<br>THE GOOD ROOLS<br>心臓<br>ビーコアラ<br>envoy frm the silence</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">お問い合わせ</h2>
+
+  <div class="contact-wrap">
+    <div class="contact-left reveal">
+      <p class="contact-text">ライブ出演依頼、メディア掲載、その他お問い合わせはメールにてお気軽にどうぞ。</p>
+      <a href="mailto:info@beekoala.jp" class="contact-email">info@beekoala.jp</a>
+    </div>
+    <div class="contact-right">
+      <div class="logo-text">BEE<br>KOA<br>LA</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">BEEKOALA</div>
+  <div class="footer-sns">
+    <a href="https://www.instagram.com/beekoala" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://x.com/beekoala" target="_blank" rel="noopener">X</a>
+    <a href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener" class="footer-tiktok">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/>
+      </svg>
+      TikTok
+    </a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Beekoala. All rights reserved.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Hamburger menu
+  const hamBtn = document.getElementById('ham-btn');
+  const navDropdown = document.getElementById('nav-dropdown');
+  hamBtn.addEventListener('click', () => {
+    const isOpen = navDropdown.classList.toggle('open');
+    hamBtn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    hamBtn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+  });
+  navDropdown.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navDropdown.classList.remove('open');
+      hamBtn.innerHTML = '&#9776;';
+      hamBtn.setAttribute('aria-label', 'メニューを開く');
+    });
+  });
+</script>
+</body>
+</html>

@@ -3,262 +3,364 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beekoala — デザインサンプル一覧</title>
+<title>Beekoala — デザインポータル</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    background: #0C0C10;
-    color: #E8DEC8;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
+    background: #FAF8F5;
+    color: #111111;
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: 400;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 48px 24px;
+    padding: 56px 24px 64px;
   }
 
-  .header {
+  .portal-header {
     text-align: center;
-    margin-bottom: 56px;
+    margin-bottom: 64px;
+    padding-bottom: 40px;
+    border-bottom: 4px solid #111;
   }
 
-  .band-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 10vw, 96px);
-    letter-spacing: 0.15em;
-    color: #F5F1E8;
-    line-height: 1;
-    margin-bottom: 12px;
+  .portal-logo {
+    margin: 0 auto 20px;
+    display: flex; justify-content: center;
   }
+  .portal-logo img { max-width: 220px; height: auto; }
 
-  .band-name span { color: #B8933F; }
-
-  .subtitle {
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: #B8933F;
+  .portal-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: .04em;
+    color: #111;
     margin-bottom: 8px;
   }
 
-  .desc {
+  .portal-sub {
+    font-size: 11px;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: #D6001C;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .portal-desc {
     font-size: 13px;
-    letter-spacing: 0.08em;
-    color: rgba(232,222,200,0.45);
-    margin-top: 16px;
+    color: #888;
+    letter-spacing: .04em;
+    margin-top: 12px;
   }
 
-  .divider {
-    width: 48px;
-    height: 1px;
-    background: #B8933F;
-    margin: 24px auto 0;
-    opacity: 0.5;
+  /* Version block */
+  .version-block { max-width: 1100px; margin: 0 auto 60px; }
+
+  .version-heading {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 24px;
+  }
+  .version-label {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -.01em;
+    line-height: 1;
+    color: #111;
+  }
+  .version-badge {
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    font-weight: 700; padding: 3px 10px;
+    border: 2px solid #111; color: #111;
+  }
+  .version-badge.latest {
+    background: #D6001C; border-color: #D6001C; color: #fff;
+  }
+  .version-note {
+    font-size: 12px; color: #888; margin-top: -16px; margin-bottom: 20px;
+    letter-spacing: .04em;
   }
 
+  /* Samples grid */
   .samples-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 16px;
-    width: 100%;
-    max-width: 960px;
   }
 
   .sample-card {
-    display: flex;
-    flex-direction: column;
-    background: #111118;
-    border: 1px solid rgba(184,147,63,0.15);
+    display: flex; flex-direction: column;
+    background: #fff;
+    border: 2px solid #111;
     text-decoration: none;
     overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
+    transition: border-color .25s, transform .25s, box-shadow .25s;
     position: relative;
   }
-
   .sample-card:hover {
-    border-color: rgba(184,147,63,0.5);
+    border-color: #D6001C;
     transform: translateY(-3px);
+    box-shadow: 4px 4px 0 #111;
   }
 
-  .card-swatch {
-    height: 8px;
-    flex-shrink: 0;
-  }
+  .card-accent { height: 6px; flex-shrink: 0; }
 
-  .card-body {
-    padding: 28px 28px 32px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
+  .card-body { padding: 24px 24px 28px; flex: 1; display: flex; flex-direction: column; }
 
   .card-num {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(184,147,63,0.6);
-    margin-bottom: 10px;
+    font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
+    color: #D6001C; font-weight: 700; margin-bottom: 8px;
   }
-
   .card-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.08em;
-    color: #F5F1E8;
-    margin-bottom: 10px;
-    line-height: 1;
+    font-family: 'Anton', sans-serif;
+    font-size: 26px; letter-spacing: .04em; color: #111;
+    margin-bottom: 8px; line-height: 1;
   }
-
   .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
+    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px;
   }
-
   .tag {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border: 1px solid rgba(232,222,200,0.12);
-    color: rgba(232,222,200,0.45);
-    border-radius: 2px;
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+    padding: 2px 8px; border: 1px solid #ccc; color: #888; border-radius: 2px;
   }
-
   .card-desc {
-    font-size: 13px;
-    color: rgba(232,222,200,0.5);
-    line-height: 1.7;
-    letter-spacing: 0.03em;
-    flex: 1;
-    margin-bottom: 24px;
+    font-size: 13px; color: #666; line-height: 1.75;
+    letter-spacing: .02em; flex: 1; margin-bottom: 20px;
   }
-
   .card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #B8933F;
-    font-weight: 500;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: #111; font-weight: 700;
+    transition: color .2s;
   }
-
   .card-link::after { content: '→'; }
+  .sample-card:hover .card-link { color: #D6001C; }
 
-  /* Swatch colors per theme */
-  .s1 .card-swatch { background: linear-gradient(to right, #080808, #C8FF00 50%, #080808); }
-  .s2 .card-swatch { background: linear-gradient(to right, #050508, #FF0066 30%, #00FFCC 70%, #050508); }
-  .s3 .card-swatch { background: linear-gradient(to right, #0E0A06, #C41E3A 50%, #0E0A06); }
-  .s4 .card-swatch { background: linear-gradient(to right, #000, #FDEE00 50%, #000); }
-  .s5 .card-swatch { background: linear-gradient(to right, #0C0C10, #B8933F 50%, #0C0C10); }
+  /* v2 accent colors */
+  .v2s1 .card-accent { background: #D6001C; }
+  .v2s2 .card-accent { background: #111; }
+  .v2s3 .card-accent { background: linear-gradient(to right, #111 50%, #D6001C 50%); }
+  .v2s4 .card-accent { background: repeating-linear-gradient(90deg, #D6001C 0, #D6001C 20%, #111 20%, #111 40%); }
+  .v2s5 .card-accent { background: #111; }
+
+  /* v1 accent colors */
+  .v1s1 .card-accent { background: linear-gradient(to right, #080808, #C8FF00 50%, #080808); }
+  .v1s2 .card-accent { background: linear-gradient(to right, #050508, #FF0066 30%, #00FFCC 70%, #050508); }
+  .v1s3 .card-accent { background: linear-gradient(to right, #0E0A06, #C41E3A 50%, #0E0A06); }
+  .v1s4 .card-accent { background: linear-gradient(to right, #000, #FDEE00 50%, #000); }
+  .v1s5 .card-accent { background: linear-gradient(to right, #0C0C10, #B8933F 50%, #0C0C10); }
+
+  .v1-card { opacity: .8; }
+  .v1-card .card-num, .v1-card .card-link { color: #888; }
+  .v1-card:hover { border-color: #888; }
+  .v1-card:hover .card-link { color: #111; }
+
+  /* Divider */
+  .divider-line { border: none; border-top: 2px solid #E0DDD8; max-width: 1100px; margin: 0 auto 60px; }
 
   .footer-note {
-    margin-top: 48px;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    color: rgba(232,222,200,0.2);
-    text-align: center;
+    text-align: center; font-size: 11px; letter-spacing: .12em;
+    color: #bbb; margin-top: 32px;
+  }
+
+  @media (max-width: 600px) {
+    .samples-grid { grid-template-columns: 1fr; }
+    body { padding: 40px 16px 48px; }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="subtitle">Design Samples</div>
-  <h1 class="band-name">BEE<span>KOALA</span></h1>
-  <div class="divider"></div>
-  <p class="desc">5つのデザインテーマをお選びください / Choose your favourite design</p>
+<div class="portal-header">
+  <div class="portal-logo">
+    <img src="./images/logo.png" alt="ビーコアラ" style="max-width: 200px; height: auto;">
+  </div>
+  <p class="portal-sub">Design Portal</p>
+  <h1 class="portal-title">Beekoala デザインポータル</h1>
+  <p class="portal-desc">デザインバージョンを選択してプレビューしてください</p>
 </div>
 
-<div class="samples-grid">
+<!-- ══ VERSION 2 ══ -->
+<div class="version-block">
+  <div class="version-heading">
+    <span class="version-label">Version 2</span>
+    <span class="version-badge latest">最新</span>
+  </div>
+  <p class="version-note">ミクスチャーロック × 白背景（Light Theme） — 5種類のレイアウト</p>
 
-  <a href="./sample1.html" class="sample-card s1">
-    <div class="card-swatch"></div>
-    <div class="card-body">
-      <div class="card-num">Sample 01</div>
-      <div class="card-name">Dark Minimal</div>
-      <div class="card-tags">
-        <span class="tag">Syne</span>
-        <span class="tag">DM Sans</span>
-        <span class="tag">Electric Lime</span>
+  <div class="samples-grid">
+
+    <a href="./samples/v2/sample1.html" class="sample-card v2s1">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V2 — Sample 01</div>
+        <div class="card-name">Standard Scroll</div>
+        <div class="card-tags">
+          <span class="tag">固定ヘッダー</span>
+          <span class="tag">縦スクロール</span>
+          <span class="tag">White</span>
+        </div>
+        <p class="card-desc">オーソドックスな縦スクロール構成。固定ヘッダー、ストリート感ある太文字タイポグラフィ。ポップなロゴとのギャップが映えるベーシック版。</p>
+        <span class="card-link">このデザインを見る</span>
       </div>
-      <p class="card-desc">漆黒の背景にエレクトリックライムのアクセント。カスタムカーソルとスムースなスクロールリビールが特徴のミニマル系。</p>
-      <span class="card-link">このデザインを見る</span>
-    </div>
-  </a>
+    </a>
 
-  <a href="./sample2.html" class="sample-card s2">
-    <div class="card-swatch"></div>
-    <div class="card-body">
-      <div class="card-num">Sample 02</div>
-      <div class="card-name">Cyberpunk</div>
-      <div class="card-tags">
-        <span class="tag">Orbitron</span>
-        <span class="tag">Share Tech Mono</span>
-        <span class="tag">Neon</span>
+    <a href="./samples/v2/sample2.html" class="sample-card v2s2">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V2 — Sample 02</div>
+        <div class="card-name">Sidebar Fixed</div>
+        <div class="card-tags">
+          <span class="tag">左サイドバー</span>
+          <span class="tag">縦ナビ</span>
+          <span class="tag">White</span>
+        </div>
+        <p class="card-desc">画面左側にサイドバーメニューを固定。黒地のサイドバーと白のメインコンテンツのコントラストが際立つストリート系レイアウト。</p>
+        <span class="card-link">このデザインを見る</span>
       </div>
-      <p class="card-desc">ピンク×シアンのネオン、スキャンラインオーバーレイ、グリッチエフェクト。SF的な未来感とエッジの効いた世界観。</p>
-      <span class="card-link">このデザインを見る</span>
-    </div>
-  </a>
+    </a>
 
-  <a href="./sample3.html" class="sample-card s3">
-    <div class="card-swatch"></div>
-    <div class="card-body">
-      <div class="card-num">Sample 03</div>
-      <div class="card-name">Grunge Rock</div>
-      <div class="card-tags">
-        <span class="tag">Bebas Neue</span>
-        <span class="tag">Crimson Text</span>
-        <span class="tag">Blood Red</span>
+    <a href="./samples/v2/sample3.html" class="sample-card v2s3">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V2 — Sample 03</div>
+        <div class="card-name">Split Layout</div>
+        <div class="card-tags">
+          <span class="tag">左右分割</span>
+          <span class="tag">スプリット</span>
+          <span class="tag">White</span>
+        </div>
+        <p class="card-desc">ヒーロー画像とテキストを左右に分割。各セクションも交互にスプリット配置することで、動的なリズム感と大胆なコントラストを演出。</p>
+        <span class="card-link">このデザインを見る</span>
       </div>
-      <p class="card-desc">ダークブラウン×ブラッドレッドのグランジ。フィルムグレインとスクラッチライン、ドロップキャップで荒削りな質感を演出。</p>
-      <span class="card-link">このデザインを見る</span>
-    </div>
-  </a>
+    </a>
 
-  <a href="./sample4.html" class="sample-card s4">
-    <div class="card-swatch"></div>
-    <div class="card-body">
-      <div class="card-num">Sample 04</div>
-      <div class="card-name">Modern Brutalism</div>
-      <div class="card-tags">
-        <span class="tag">Black Han Sans</span>
-        <span class="tag">Space Mono</span>
-        <span class="tag">Yellow</span>
+    <a href="./samples/v2/sample4.html" class="sample-card v2s4">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V2 — Sample 04</div>
+        <div class="card-name">Asymmetric Grid</div>
+        <div class="card-tags">
+          <span class="tag">非対称</span>
+          <span class="tag">グリッド</span>
+          <span class="tag">White</span>
+        </div>
+        <p class="card-desc">アシンメトリーな非対称グリッドレイアウト。カラム比が意図的にズレることで、ミクスチャーロックの不均一なエネルギーを視覚化する。</p>
+        <span class="card-link">このデザインを見る</span>
       </div>
-      <p class="card-desc">白黒×イエローの太ボーダーグリッド。情報を剥き出しにするブルータリズム。圧倒的な存在感と視認性。</p>
-      <span class="card-link">このデザインを見る</span>
-    </div>
-  </a>
+    </a>
 
-  <a href="./sample5.html" class="sample-card s5">
-    <div class="card-swatch"></div>
-    <div class="card-body">
-      <div class="card-num">Sample 05</div>
-      <div class="card-name">Elegant Dark</div>
-      <div class="card-tags">
-        <span class="tag">Cormorant Garamond</span>
-        <span class="tag">Raleway</span>
-        <span class="tag">Gold</span>
+    <a href="./samples/v2/sample5.html" class="sample-card v2s5">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V2 — Sample 05</div>
+        <div class="card-name">Editorial</div>
+        <div class="card-tags">
+          <span class="tag">雑誌風</span>
+          <span class="tag">境界線なし</span>
+          <span class="tag">White</span>
+        </div>
+        <p class="card-desc">セクションの境界線を持たない雑誌のようなエディトリアルレイアウト。コンテンツが自然に流れ込み、洗練されたストリートマガジン感を演出。</p>
+        <span class="card-link">このデザインを見る</span>
       </div>
-      <p class="card-desc">アンティークゴールドとネイビーブラック。ゴールドのオーナメント装飾と優雅なタイポグラフィで格調高い世界観を表現。</p>
-      <span class="card-link">このデザインを見る</span>
-    </div>
-  </a>
+    </a>
 
+  </div>
 </div>
 
-<p class="footer-note">&copy; 2026 Beekoala — Internal Design Review</p>
+<hr class="divider-line">
+
+<!-- ══ VERSION 1 ══ -->
+<div class="version-block">
+  <div class="version-heading">
+    <span class="version-label">Version 1</span>
+    <span class="version-badge">初期案</span>
+  </div>
+  <p class="version-note">ダーク背景テーマ — 5種類のデザイン</p>
+
+  <div class="samples-grid">
+
+    <a href="./samples/v1/sample1.html" class="sample-card v1s1 v1-card">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V1 — Sample 01</div>
+        <div class="card-name">Dark Minimal</div>
+        <div class="card-tags">
+          <span class="tag">Syne</span>
+          <span class="tag">DM Sans</span>
+          <span class="tag">Electric Lime</span>
+        </div>
+        <p class="card-desc">漆黒の背景にエレクトリックライムのアクセント。カスタムカーソルとスムースなスクロールリビールが特徴のミニマル系。</p>
+        <span class="card-link">このデザインを見る</span>
+      </div>
+    </a>
+
+    <a href="./samples/v1/sample2.html" class="sample-card v1s2 v1-card">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V1 — Sample 02</div>
+        <div class="card-name">Cyberpunk</div>
+        <div class="card-tags">
+          <span class="tag">Orbitron</span>
+          <span class="tag">Share Tech Mono</span>
+          <span class="tag">Neon</span>
+        </div>
+        <p class="card-desc">ピンク×シアンのネオン、スキャンラインオーバーレイ、グリッチエフェクト。SF的な未来感とエッジの効いた世界観。</p>
+        <span class="card-link">このデザインを見る</span>
+      </div>
+    </a>
+
+    <a href="./samples/v1/sample3.html" class="sample-card v1s3 v1-card">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V1 — Sample 03</div>
+        <div class="card-name">Grunge Rock</div>
+        <div class="card-tags">
+          <span class="tag">Bebas Neue</span>
+          <span class="tag">Crimson Text</span>
+          <span class="tag">Blood Red</span>
+        </div>
+        <p class="card-desc">ダークブラウン×ブラッドレッドのグランジ。フィルムグレインとスクラッチライン、ドロップキャップで荒削りな質感を演出。</p>
+        <span class="card-link">このデザインを見る</span>
+      </div>
+    </a>
+
+    <a href="./samples/v1/sample4.html" class="sample-card v1s4 v1-card">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V1 — Sample 04</div>
+        <div class="card-name">Modern Brutalism</div>
+        <div class="card-tags">
+          <span class="tag">Black Han Sans</span>
+          <span class="tag">Space Mono</span>
+          <span class="tag">Yellow</span>
+        </div>
+        <p class="card-desc">白黒×イエローの太ボーダーグリッド。情報を剥き出しにするブルータリズム。圧倒的な存在感と視認性。</p>
+        <span class="card-link">このデザインを見る</span>
+      </div>
+    </a>
+
+    <a href="./samples/v1/sample5.html" class="sample-card v1s5 v1-card">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-num">V1 — Sample 05</div>
+        <div class="card-name">Elegant Dark</div>
+        <div class="card-tags">
+          <span class="tag">Cormorant Garamond</span>
+          <span class="tag">Raleway</span>
+          <span class="tag">Gold</span>
+        </div>
+        <p class="card-desc">アンティークゴールドとネイビーブラック。ゴールドのオーナメント装飾と優雅なタイポグラフィで格調高い世界観を表現。</p>
+        <span class="card-link">このデザインを見る</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<p class="footer-note">&copy; 2026 Beekoala — Internal Design Portal</p>
 
 </body>
 </html>

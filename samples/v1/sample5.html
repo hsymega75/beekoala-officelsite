@@ -1,0 +1,991 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beekoala — Official</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0C0C10;
+    --bg2: #111118;
+    --bg3: #16161F;
+    --gold: #B8933F;
+    --gold2: #D4A85A;
+    --gold-pale: rgba(184,147,63,0.15);
+    --cream: #E8DEC8;
+    --cream2: #C4BAA4;
+    --cream3: rgba(232,222,200,0.5);
+    --white: #F5F1E8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 60px;
+    background: linear-gradient(to bottom, rgba(12,12,16,0.97) 0%, rgba(12,12,16,0) 100%);
+    transition: padding 0.4s;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 22px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 100%;
+    height: 1px;
+    background: var(--gold);
+    transition: right 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--cream); }
+  .nav-links a:hover::after { right: 0; }
+
+  .nav-tiktok {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid rgba(184,147,63,0.4);
+    padding: 7px 16px;
+    color: var(--gold) !important;
+    transition: border-color 0.3s, background 0.3s !important;
+  }
+
+  .nav-tiktok::after { display: none !important; }
+
+  .nav-tiktok:hover {
+    background: var(--gold-pale) !important;
+    border-color: var(--gold) !important;
+    color: var(--gold2) !important;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    /* filter removed: show original photo */
+  }
+
+  /* Vignette */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(12,12,16,0.75) 100%);
+    z-index: 1;
+  }
+
+  /* Bottom fade */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    z-index: 2;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 0 40px;
+    max-width: 860px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(64px, 10vw, 128px);
+    line-height: 0.92;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .hero-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .hero-ornament-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+
+  .hero-ornament-line:last-child {
+    background: linear-gradient(to left, transparent, var(--gold));
+  }
+
+  .hero-ornament-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 2.5vw, 24px);
+    color: var(--cream2);
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTION COMMON */
+  .section-wrap {
+    padding: 120px 80px;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    margin-bottom: 56px;
+  }
+
+  /* Gold rule divider */
+  .gold-rule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 80px;
+    padding: 0;
+  }
+
+  .gold-rule::before,
+  .gold-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    opacity: 0.25;
+  }
+
+  .gold-rule::after {
+    background: linear-gradient(to left, var(--gold), transparent);
+  }
+
+  .gold-rule-diamond {
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    opacity: 0.4;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ABOUT */
+  #about { }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+
+  .about-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 2;
+    color: var(--cream2);
+    margin-bottom: 1.6em;
+  }
+
+  .about-text p:first-child {
+    font-size: 21px;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .about-aside { }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(184,147,63,0.12);
+    margin-bottom: 32px;
+  }
+
+  .stat-item {
+    background: var(--bg2);
+    padding: 36px 28px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+
+  .stat-item:hover { background: var(--bg3); }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--gold2);
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream3);
+  }
+
+  .about-quote {
+    padding: 28px 32px;
+    border-left: 1px solid var(--gold);
+    background: var(--gold-pale);
+  }
+
+  .about-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--cream2);
+    line-height: 1.9;
+  }
+
+  /* LIVE */
+  #live { padding-top: 100px; }
+
+  .live-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* Upcoming */
+  .upcoming-elegant {
+    background: var(--bg2);
+    border: 1px solid rgba(184,147,63,0.2);
+    padding: 52px 48px;
+    position: relative;
+  }
+
+  /* Corner ornaments */
+  .upcoming-elegant::before,
+  .upcoming-elegant::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+  }
+
+  .upcoming-elegant::before {
+    top: -1px; left: -1px;
+    border-top: 1px solid var(--gold);
+    border-left: 1px solid var(--gold);
+  }
+
+  .upcoming-elegant::after {
+    bottom: -1px; right: -1px;
+    border-bottom: 1px solid var(--gold);
+    border-right: 1px solid var(--gold);
+  }
+
+  .live-section-label {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .live-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(184,147,63,0.25);
+  }
+
+  .event-date-elegant {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .event-weekday {
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+  }
+
+  .event-name-elegant {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 28px;
+    line-height: 1.3;
+  }
+
+  .event-details-list { list-style: none; margin-bottom: 40px; }
+
+  .event-details-list li {
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--cream2);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(232,222,200,0.06);
+    display: flex;
+    gap: 16px;
+  }
+
+  .event-details-list li span:first-child {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    width: 64px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  .ticket-btn {
+    display: block;
+    text-align: center;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--gold);
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .ticket-btn:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+
+  /* Archive */
+  .archive-elegant {
+    background: var(--bg2);
+    border: 1px solid rgba(184,147,63,0.12);
+    overflow: hidden;
+  }
+
+  .archive-img-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .archive-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s;
+  }
+
+  .archive-elegant:hover .archive-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  .archive-img-tag {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px 24px;
+    background: linear-gradient(to top, rgba(12,12,16,0.9), transparent);
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .archive-body { padding: 36px 40px; }
+
+  .archive-date-e {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .archive-title-e {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .archive-venue-e {
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    color: var(--cream3);
+    margin-bottom: 20px;
+    letter-spacing: 0.08em;
+  }
+
+  .archive-quote-e {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--cream2);
+    line-height: 1.8;
+    padding-left: 16px;
+    border-left: 1px solid var(--gold);
+    opacity: 0.85;
+  }
+
+  /* CONTACT */
+  #contact { padding-top: 100px; padding-bottom: 80px; }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--cream2);
+    line-height: 2;
+    margin-bottom: 40px;
+    letter-spacing: 0.04em;
+  }
+
+  .contact-email-e {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .contact-email-e::after {
+    content: '→';
+    font-size: 16px;
+    transition: transform 0.3s;
+  }
+
+  .contact-email-e:hover { color: var(--gold2); }
+  .contact-email-e:hover::after { transform: translateX(4px); }
+
+  .contact-right { text-align: center; }
+
+  .contact-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 0.9;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(184,147,63,0.08);
+    -webkit-text-stroke: 1px rgba(184,147,63,0.15);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(184,147,63,0.12);
+    padding: 48px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 28px;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  .footer-logo-e {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 20px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--cream2);
+  }
+
+  .footer-sns {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .footer-sns a {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream3);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: color 0.3s;
+  }
+
+  .footer-sns a:hover { color: var(--gold); }
+
+  .footer-copy {
+    width: 100%;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(232,222,200,0.2);
+    margin-top: 8px;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* HAMBURGER */
+  .ham-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 22px;
+    line-height: 1;
+    padding: 7px 13px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    z-index: 110;
+  }
+
+  .nav-dropdown {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0; right: 0;
+    background: var(--bg2);
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid rgba(184,147,63,0.2);
+    z-index: 105;
+    flex-direction: column;
+    padding: 8px 0;
+  }
+
+  .nav-dropdown.open { display: flex; }
+
+  .nav-dropdown a {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream2);
+    text-decoration: none;
+    padding: 14px 28px;
+    border-bottom: 1px solid rgba(184,147,63,0.08);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s;
+  }
+
+  .nav-dropdown a:hover { color: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 20px 20px; }
+    .nav-links { display: none; }
+    .ham-btn { display: block; }
+
+    .section-wrap { padding: 60px 20px; }
+    .gold-rule { margin: 0 20px; }
+
+    .about-layout,
+    .live-layout { grid-template-columns: 1fr; gap: 32px; }
+
+    .contact-layout { grid-template-columns: 1fr; gap: 32px; }
+
+    /* Hero: stack image above content on mobile */
+    .hero { height:auto; min-height:unset; flex-direction:column; justify-content:flex-start; }
+    .hero-img { position:relative; width:100%; height:auto; object-fit:contain; }
+    .hero::before, .hero::after { display:none; }
+    .hero-content { position:relative; z-index:3; padding:1.5rem 1.25rem 2.5rem; background:var(--bg); text-align:left; }
+    .hero-eyebrow { justify-content:flex-start; margin-bottom:16px; }
+    .hero-ornament { justify-content:flex-start; }
+    .hero-title { font-size:12vw; letter-spacing:0.06em; }
+
+    .upcoming-elegant { padding: 36px 24px; }
+    .archive-body { padding: 24px 20px; }
+
+    .section-title { margin-bottom: 36px; }
+
+    .contact-wordmark { display: none; }
+
+    footer {
+      padding: 28px 20px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .footer-sns { gap: 20px; flex-wrap: wrap; justify-content: center; }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { gap: 20px; }
+
+    .section-wrap { padding: 80px 24px; }
+    .gold-rule { margin: 0 24px; }
+
+    .about-layout,
+    .live-layout,
+    .contact-layout { grid-template-columns: 1fr; gap: 48px; }
+
+    .hero-title { letter-spacing: 0.06em; }
+    .contact-wordmark { display: none; }
+
+    footer { padding: 36px 24px; }
+    .footer-sns { gap: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Beekoala</a>
+  <ul class="nav-links">
+    <li><a href="#about">バンドについて</a></li>
+    <li><a href="#live">ライブ情報</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+    <li>
+      <a href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener" class="nav-tiktok">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/>
+        </svg>
+        TikTok
+      </a>
+    </li>
+  </ul>
+  <button class="ham-btn" id="ham-btn" aria-label="メニューを開く">&#9776;</button>
+</nav>
+<div class="nav-dropdown" id="nav-dropdown">
+  <a href="#about">バンドについて</a>
+  <a href="#live">ライブ情報</a>
+  <a href="#contact">お問い合わせ</a>
+  <a href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/>
+    </svg>
+    TikTok
+  </a>
+</div>
+
+<section class="hero" id="home">
+  <img src="../../images/top-band.jpg" alt="Beekoala バンド写真" class="hero-img">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Fukuoka &nbsp;·&nbsp; 2026年始動</div>
+    <h1 class="hero-title">Beekoala</h1>
+    <div class="hero-ornament">
+      <div class="hero-ornament-line"></div>
+      <div class="hero-ornament-diamond"></div>
+      <div class="hero-ornament-line"></div>
+    </div>
+    <p class="hero-sub">20年ぶりの再始動。あの静かな衝動が、ふたたび動き出す。</p>
+  </div>
+</section>
+
+<div class="gold-rule"><div class="gold-rule-diamond"></div></div>
+
+<section class="section-wrap" id="about">
+  <div class="section-eyebrow">Our Story</div>
+  <h2 class="section-title">バンドについて</h2>
+
+  <div class="about-layout">
+    <div class="about-text reveal">
+      <p>高校の同級生として出会い、音楽で繋がった仲間がいた。卒業と同時にバンドは静かに幕を閉じ、それぞれが別々の道を歩んだ。仕事、家族、移住——気づけば20年という時間が流れていた。</p>
+      <p>ある日届いた一本のメッセージが、眠っていた衝動を叩き起こした。「また、やってみないか。」返事に時間はかからなかった。再始動の声に、新たな仲間も加わった。あの頃には鳴らせなかった音を、一緒に鳴らすために——2026年、5人のBeekoalaが福岡から動き出す。</p>
+    </div>
+
+    <div class="about-aside reveal reveal-delay-2">
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">20</div>
+          <div class="stat-label">Years</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">2026</div>
+          <div class="stat-label">Reborn</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">福岡</div>
+          <div class="stat-label">Base</div>
+        </div>
+      </div>
+      <div class="about-quote">
+        <p>「また、やってみないか。」——返事に、時間はかからなかった。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"><div class="gold-rule-diamond"></div></div>
+
+<section class="section-wrap" id="live">
+  <div class="section-eyebrow">Live Information</div>
+  <h2 class="section-title">ライブ情報</h2>
+
+  <div class="live-layout">
+    <div class="upcoming-elegant reveal">
+      <div class="live-section-label">Upcoming Live</div>
+      <div class="event-date-elegant">2026.07.18</div>
+      <div class="event-weekday">Sunday</div>
+      <div class="event-name-elegant">ライブタイトル入力</div>
+      <ul class="event-details-list">
+        <li>
+          <span>Venue</span>
+          <span>LIVE HOUSE DRUM Be-1 ／ 福岡市中央区大名</span>
+        </li>
+        <li>
+          <span>Time</span>
+          <span>OPEN 17:00 ／ START 18:00</span>
+        </li>
+        <li>
+          <span>Ticket</span>
+          <span>前売 ¥2,500 ／ 当日 ¥3,000（+1drink）</span>
+        </li>
+      </ul>
+      <a href="#" class="ticket-btn">チケットを購入</a>
+    </div>
+
+    <div class="archive-elegant reveal reveal-delay-2">
+      <div class="archive-img-wrap">
+        <img src="../../images/live-archive.jpg" alt="ライブアーカイブ写真">
+        <div class="archive-img-tag">Live Archive</div>
+      </div>
+      <div class="archive-body">
+        <div class="archive-date-e">2026.07.18 (Sat)</div>
+        <div class="archive-title-e">BLIMIC of SOUND act.56</div>
+        <div class="archive-venue-e">福岡Livehouse Dragoon ／ 福岡</div>
+        <p class="archive-quote">Cast<br>ハイファイコーヒーズ<br>THE GOOD ROOLS<br>心臓<br>ビーコアラ<br>envoy frm the silence</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"><div class="gold-rule-diamond"></div></div>
+
+<section class="section-wrap" id="contact">
+  <div class="section-eyebrow">Contact</div>
+  <h2 class="section-title">お問い合わせ</h2>
+
+  <div class="contact-layout">
+    <div class="reveal">
+      <p class="contact-text">ライブ出演依頼、メディア掲載、その他お問い合わせはメールにてお気軽にどうぞ。</p>
+      <a href="mailto:info@beekoala.jp" class="contact-email-e">info@beekoala.jp</a>
+    </div>
+    <div class="contact-right reveal reveal-delay-2">
+      <div class="contact-wordmark">Bee<br>koala</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo-e">Beekoala</div>
+  <div class="footer-sns">
+    <a href="https://www.instagram.com/beekoala" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://x.com/beekoala" target="_blank" rel="noopener">X</a>
+    <a href="https://www.tiktok.com/@beekoala" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.55a8.11 8.11 0 0 0 4.77 1.54V6.65a4.85 4.85 0 0 1-1-.04z"/>
+      </svg>
+      TikTok
+    </a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Beekoala. All rights reserved.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Hamburger menu
+  const hamBtn = document.getElementById('ham-btn');
+  const navDropdown = document.getElementById('nav-dropdown');
+  hamBtn.addEventListener('click', () => {
+    const isOpen = navDropdown.classList.toggle('open');
+    hamBtn.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    hamBtn.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+  });
+  navDropdown.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navDropdown.classList.remove('open');
+      hamBtn.innerHTML = '&#9776;';
+      hamBtn.setAttribute('aria-label', 'メニューを開く');
+    });
+  });
+</script>
+</body>
+</html>
