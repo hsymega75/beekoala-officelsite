@@ -12,7 +12,7 @@ body { display: flex; min-height: 100vh; }
   border-right: 4px solid var(--fg);
 }
 .sidebar-logo { margin-bottom: 2.5rem; }
-.sidebar-logo img { filter: invert(1) !important; }
+.sidebar-logo img { filter: invert(1) !important; width: 120px; max-width: 100%; height: auto; }
 
 .sidebar-nav { display: flex; flex-direction: column; gap: 0; flex: 1; }
 .sidebar-nav a {
