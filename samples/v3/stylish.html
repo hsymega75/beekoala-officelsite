@@ -92,6 +92,7 @@
     .disco-title { font-family:var(--fh); font-size:.9rem; font-weight:700; margin-bottom:1.25rem; }
     .video-wrapper { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; }
     .video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+    .video-error { display:flex; align-items:center; justify-content:center; font-size:.75rem; color:var(--muted); background:var(--bg2); }
 
     /* ── Members ── */
     .member-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); }
@@ -259,29 +260,7 @@
 <div class="section" id="disco">
   <p class="s-label reveal">Discography</p>
   <h2 class="reveal d1">Music /<br>Video</h2>
-  <div class="disco-grid reveal d2">
-    <div class="disco-card">
-      <div class="disco-num">Track 01</div>
-      <div class="disco-title">ダミータイトル</div>
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/dummyID001" title="Beekoala Track 01" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div class="disco-card">
-      <div class="disco-num">Track 02</div>
-      <div class="disco-title">ダミータイトル</div>
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/dummyID002" title="Beekoala Track 02" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div class="disco-card">
-      <div class="disco-num">Track 03</div>
-      <div class="disco-title">ダミータイトル</div>
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/dummyID003" title="Beekoala Track 03" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
+  <div id="youtube-list" class="disco-grid reveal d2"></div>
 </div>
 
 <div class="rule"></div>
@@ -357,6 +336,7 @@
 </footer>
 
 <script src="../../assets/js/live-fetch.js"></script>
+<script src="../../assets/js/youtube-fetch.js"></script>
 <script>
   /* Custom cursor */
   const cur = document.getElementById('cur'), r = document.getElementById('cur-r');

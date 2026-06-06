@@ -121,6 +121,7 @@
     .disco-title { font-family:var(--fh); font-size:.78rem; color:var(--fg); font-weight:600; margin-bottom:.75rem; }
     .video-wrapper { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border:1px solid rgba(0,255,204,.15); }
     .video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+    .video-error { display:flex; align-items:center; justify-content:center; font-size:.72rem; color:var(--pink); background:rgba(255,0,102,.04); }
 
     /* ── Members ── */
     .member-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1.5rem; }
@@ -304,29 +305,7 @@
 <div class="section" id="disco">
   <p class="s-badge reveal">// ディスコグラフィー</p>
   <h2 class="reveal d1">DISCOGRAPHY<br><em>VIDEO</em></h2>
-  <div class="disco-grid reveal d2">
-    <div class="disco-card">
-      <p class="disco-num">TRACK 01</p>
-      <p class="disco-title">ダミータイトル</p>
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/dummyID001" title="Beekoala Track 01" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div class="disco-card">
-      <p class="disco-num">TRACK 02</p>
-      <p class="disco-title">ダミータイトル</p>
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/dummyID002" title="Beekoala Track 02" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-    <div class="disco-card">
-      <p class="disco-num">TRACK 03</p>
-      <p class="disco-title">ダミータイトル</p>
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/dummyID003" title="Beekoala Track 03" frameborder="0" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
+  <div id="youtube-list" class="disco-grid reveal d2"></div>
 </div>
 
 <div class="cyber-rule"></div>
@@ -402,6 +381,7 @@
 </footer>
 
 <script src="../../assets/js/live-fetch.js"></script>
+<script src="../../assets/js/youtube-fetch.js"></script>
 <script>
   const hamBtn = document.getElementById('ham-btn');
   const mainNav = document.getElementById('main-nav');
