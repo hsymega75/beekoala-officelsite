@@ -1,415 +1,507 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beekoala — デザインポータル</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEEKOALA | Official Web Site</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Bebas Neue for stylish street vibe, Noto Sans JP for readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  body {
-    background: #FAF8F5;
-    color: #111111;
-    font-family: 'M PLUS 1p', sans-serif;
-    font-weight: 400;
-    min-height: 100vh;
-    padding: 56px 24px 64px;
-  }
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'punk-green': '#39FF14', // ストリート感のあるネオングリーン
+                        'punk-black': '#111111',
+                    },
+                    fontFamily: {
+                        'street': ['"Bebas Neue"', 'sans-serif'], // スタイリッシュで読みやすい見出しフォント
+                        'body': ['"Noto Sans JP"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-  .portal-header {
-    text-align: center;
-    margin-bottom: 64px;
-    padding-bottom: 40px;
-    border-bottom: 4px solid #111;
-  }
+    <style>
+        /* ベーススタイル */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #FFFFFF;
+            color: #111111;
+            /* 背景に少しノイズ（ドット）を入れてストリート感を演出 */
+            background-image: radial-gradient(#ddd 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
 
-  .portal-logo {
-    margin: 0 auto 20px;
-    display: flex; justify-content: center;
-  }
-  .portal-logo img { max-width: 220px; height: auto; }
+        /* ソリッドな影（グラフィックデザイン的アプローチ） */
+        .solid-shadow {
+            box-shadow: 8px 8px 0px 0px #111111;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .solid-shadow-green {
+            box-shadow: 8px 8px 0px 0px #39FF14;
+            transition: all 0.2s ease-in-out;
+        }
 
-  .portal-title {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    letter-spacing: .04em;
-    color: #111;
-    margin-bottom: 8px;
-  }
+        /* ホバー時の押し込みアクション */
+        .solid-shadow:hover, .solid-shadow-green:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px 0px #111111;
+        }
+        
+        .solid-shadow-green:hover {
+            box-shadow: 4px 4px 0px 0px #39FF14;
+        }
 
-  .portal-sub {
-    font-size: 11px;
-    letter-spacing: .32em;
-    text-transform: uppercase;
-    color: #D6001C;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
+        /* テキストの縁取り */
+        .text-outline {
+            text-shadow: 
+                -1px -1px 0 #111,  
+                 1px -1px 0 #111,
+                -1px  1px 0 #111,
+                 1px  1px 0 #111,
+                 4px  4px 0 #39FF14;
+        }
+        
+        .text-outline-black {
+            text-shadow: 3px 3px 0 #111;
+        }
 
-  .portal-desc {
-    font-size: 13px;
-    color: #888;
-    letter-spacing: .04em;
-    margin-top: 12px;
-  }
-
-  /* Version block */
-  .version-block { max-width: 1100px; margin: 0 auto 60px; }
-
-  .version-heading {
-    display: flex; align-items: baseline; gap: 1rem;
-    margin-bottom: 24px;
-  }
-  .version-label {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    letter-spacing: -.01em;
-    line-height: 1;
-    color: #111;
-  }
-  .version-badge {
-    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
-    font-weight: 700; padding: 3px 10px;
-    border: 2px solid #111; color: #111;
-  }
-  .version-badge.latest {
-    background: #D6001C; border-color: #D6001C; color: #fff;
-  }
-  .version-note {
-    font-size: 12px; color: #888; margin-top: -16px; margin-bottom: 20px;
-    letter-spacing: .04em;
-  }
-
-  /* Samples grid */
-  .samples-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-  }
-
-  .sample-card {
-    display: flex; flex-direction: column;
-    background: #fff;
-    border: 2px solid #111;
-    text-decoration: none;
-    overflow: hidden;
-    transition: border-color .25s, transform .25s, box-shadow .25s;
-    position: relative;
-  }
-  .sample-card:hover {
-    border-color: #D6001C;
-    transform: translateY(-3px);
-    box-shadow: 4px 4px 0 #111;
-  }
-
-  .card-accent { height: 6px; flex-shrink: 0; }
-
-  .card-body { padding: 24px 24px 28px; flex: 1; display: flex; flex-direction: column; }
-
-  .card-num {
-    font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-    color: #D6001C; font-weight: 700; margin-bottom: 8px;
-  }
-  .card-name {
-    font-family: 'Anton', sans-serif;
-    font-size: 26px; letter-spacing: .04em; color: #111;
-    margin-bottom: 8px; line-height: 1;
-  }
-  .card-tags {
-    display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 16px;
-  }
-  .tag {
-    font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
-    padding: 2px 8px; border: 1px solid #ccc; color: #888; border-radius: 2px;
-  }
-  .card-desc {
-    font-size: 13px; color: #666; line-height: 1.75;
-    letter-spacing: .02em; flex: 1; margin-bottom: 20px;
-  }
-  .card-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-    color: #111; font-weight: 700;
-    transition: color .2s;
-  }
-  .card-link::after { content: '→'; }
-  .sample-card:hover .card-link { color: #D6001C; }
-
-  /* v2 accent colors */
-  .v2s1 .card-accent { background: #D6001C; }
-  .v2s2 .card-accent { background: #111; }
-  .v2s3 .card-accent { background: linear-gradient(to right, #111 50%, #D6001C 50%); }
-  .v2s4 .card-accent { background: repeating-linear-gradient(90deg, #D6001C 0, #D6001C 20%, #111 20%, #111 40%); }
-  .v2s5 .card-accent { background: #111; }
-
-  /* v3 accent colors */
-  .v3pop .card-accent { background: linear-gradient(to right, #050508, #FF0066 25%, #00FFCC 60%, #B400FF); }
-  .v3sty .card-accent { background: linear-gradient(to right, #080808, #C8FF00 50%, #080808); }
-
-  /* v1 accent colors */
-  .v1s1 .card-accent { background: linear-gradient(to right, #080808, #C8FF00 50%, #080808); }
-  .v1s2 .card-accent { background: linear-gradient(to right, #050508, #FF0066 30%, #00FFCC 70%, #050508); }
-  .v1s3 .card-accent { background: linear-gradient(to right, #0E0A06, #C41E3A 50%, #0E0A06); }
-  .v1s4 .card-accent { background: linear-gradient(to right, #000, #FDEE00 50%, #000); }
-  .v1s5 .card-accent { background: linear-gradient(to right, #0C0C10, #B8933F 50%, #0C0C10); }
-
-  .v1-card { opacity: .8; }
-  .v1-card .card-num, .v1-card .card-link { color: #888; }
-  .v1-card:hover { border-color: #888; }
-  .v1-card:hover .card-link { color: #111; }
-
-  /* Divider */
-  .divider-line { border: none; border-top: 2px solid #E0DDD8; max-width: 1100px; margin: 0 auto 60px; }
-
-  .footer-note {
-    text-align: center; font-size: 11px; letter-spacing: .12em;
-    color: #bbb; margin-top: 32px;
-  }
-
-  @media (max-width: 600px) {
-    .samples-grid { grid-template-columns: 1fr; }
-    body { padding: 40px 16px 48px; }
-  }
-</style>
+        /* アシンメトリーな区切り線 */
+        .jagged-border {
+            border-bottom: 4px dashed #111;
+        }
+        
+        /* カスタムスクロールバー */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #111; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #39FF14; 
+        }
+    </style>
 </head>
-<body>
+<body class="antialiased overflow-x-hidden selection:bg-punk-green selection:text-punk-black">
 
-<div class="portal-header">
-  <div class="portal-logo">
-    <img src="./images/logo.png" alt="ビーコアラ" style="max-width: 200px; height: auto;">
-  </div>
-  <p class="portal-sub">Design Portal</p>
-  <h1 class="portal-title">Beekoala デザインポータル</h1>
-  <p class="portal-desc">デザインバージョンを選択してプレビューしてください</p>
-</div>
+    <nav class="fixed w-full top-0 z-50 bg-white border-b-4 border-punk-black transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-street text-4xl tracking-wider text-punk-black hover:text-punk-green transition-colors mt-2">
+                        BEEKOALA
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#philosophy" class="font-street text-xl text-punk-black hover:text-punk-green transition-colors mt-1">PHILOSOPHY</a>
+                    <a href="#media" class="font-street text-xl text-punk-black hover:text-punk-green transition-colors mt-1">MEDIA</a>
+                    <a href="#member" class="font-street text-xl text-punk-black hover:text-punk-green transition-colors mt-1">MEMBER</a>
+                    
+                    <div class="w-px h-6 bg-gray-300 mx-2"></div>
+                    
+                    <a href="#" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="#" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#live" class="ml-4 font-street text-xl bg-punk-black text-white py-1 px-6 border-2 border-punk-black solid-shadow-green tracking-widest hover:bg-punk-green hover:text-punk-black transition-colors">
+                        TICKETS
+                    </a>
+                </div>
 
-<!-- ══ VERSION 3 ══ -->
-<div class="version-block">
-  <div class="version-heading">
-    <span class="version-label">Version 3</span>
-    <span class="version-badge latest">最新</span>
-  </div>
-  <p class="version-note">メンバー紹介・Discography・microCMS連携を含む完全版 — 2種類</p>
-
-  <div class="samples-grid">
-
-    <a href="./samples/v3/pop.html" class="sample-card v3pop">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V3 — Pop</div>
-        <div class="card-name">Pop Cyberpunk</div>
-        <div class="card-tags">
-          <span class="tag">Orbitron</span>
-          <span class="tag">Multi Neon</span>
-          <span class="tag">Dark</span>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-punk-black focus:outline-none p-2 border-2 border-punk-black bg-punk-green">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <p class="card-desc">サイバーパンクの骨格にピンク×シアン×パープルの多色ネオンを重ねたポップなデザイン。メンバー紹介・Discography・microCMS連携済み完全版。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    </nav>
 
-    <a href="./samples/v3/stylish.html" class="sample-card v3sty">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V3 — Stylish</div>
-        <div class="card-name">Stylish Minimal</div>
-        <div class="card-tags">
-          <span class="tag">Syne</span>
-          <span class="tag">Electric Lime</span>
-          <span class="tag">Dark</span>
+    <header class="pt-28 pb-16 px-4 relative overflow-hidden bg-white">
+        <div class="max-w-7xl mx-auto relative flex flex-col md:flex-row items-center gap-8">
+            <!-- 背景の装飾 -->
+            <div class="absolute top-10 right-10 w-64 h-64 bg-punk-green rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+            
+            <!-- アー写コンテナ -->
+            <div class="w-full md:w-2/3 relative border-4 border-punk-black solid-shadow bg-gray-200 aspect-[16/10] overflow-hidden group">
+                <img src="https://placehold.co/1200x800/111111/39FF14?text=BEEKOALA+ARTIST+PHOTO" alt="BEEKOALA Artist Photo" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div class="absolute inset-0 bg-punk-green opacity-0 group-hover:opacity-10 mix-blend-overlay transition-opacity duration-500"></div>
+            </div>
+            
+            <!-- タイトルエリア -->
+            <div class="w-full md:w-1/3 flex flex-col justify-center relative z-10 text-center md:text-left">
+                <h1 class="font-street text-7xl md:text-8xl lg:text-9xl text-punk-black tracking-tight leading-none mb-4">
+                    BEE<br/>KOALA
+                </h1>
+                <div class="inline-block bg-punk-black text-punk-green font-street text-2xl md:text-3xl px-6 py-2 border-2 border-punk-black mb-6 transform -rotate-2 w-max mx-auto md:mx-0">
+                    YOUTH PUNK NEVER DIES
+                </div>
+                <p class="font-bold text-gray-700 tracking-widest text-sm md:text-base">
+                    JAPANESE PUNK ROCK BAND<br>
+                    FROM SOMEWHERE IN ASIA.
+                </p>
+            </div>
         </div>
-        <p class="card-desc">漆黒とエレクトリックライムのコントラスト。カスタムカーソル・モノクロームなメンバーグリッド・Discography・microCMS連携済み完全版。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    </header>
 
-  </div>
-</div>
-
-<hr class="divider-line">
-
-<!-- ══ VERSION 2 ══ -->
-<div class="version-block">
-  <div class="version-heading">
-    <span class="version-label">Version 2</span>
-    <span class="version-badge">ライトテーマ</span>
-  </div>
-  <p class="version-note">白背景（Light Theme） — 5種類のレイアウト</p>
-
-  <div class="samples-grid">
-
-    <a href="./samples/v2/sample1.html" class="sample-card v2s1">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V2 — Sample 01</div>
-        <div class="card-name">Standard Scroll</div>
-        <div class="card-tags">
-          <span class="tag">固定ヘッダー</span>
-          <span class="tag">縦スクロール</span>
-          <span class="tag">White</span>
+    <section id="philosophy" class="py-20 px-4 bg-punk-black text-white jagged-border relative">
+        <!-- 背景の透かし文字 -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center opacity-5">
+            <span class="font-street text-[20vw] leading-none text-white whitespace-nowrap">PHILOSOPHY</span>
         </div>
-        <p class="card-desc">オーソドックスな縦スクロール構成。固定ヘッダー、ストリート感ある太文字タイポグラフィ。ポップなロゴとのギャップが映えるベーシック版。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
-
-    <a href="./samples/v2/sample2.html" class="sample-card v2s2">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V2 — Sample 02</div>
-        <div class="card-name">Sidebar Fixed</div>
-        <div class="card-tags">
-          <span class="tag">左サイドバー</span>
-          <span class="tag">縦ナビ</span>
-          <span class="tag">White</span>
+        
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="w-12 h-1 bg-punk-green"></div>
+                <h2 class="font-street text-5xl md:text-6xl text-punk-green tracking-wider pt-2">OUR PHILOSOPHY</h2>
+            </div>
+            
+            <div class="bg-white text-punk-black p-8 md:p-12 border-4 border-punk-green solid-shadow-green transform rotate-1">
+                <h3 class="font-bold text-2xl md:text-3xl mb-6 border-b-2 border-punk-black pb-4 inline-block">
+                    俺たちの青春は、まだ終わってない。
+                </h3>
+                <div class="space-y-6 font-medium leading-loose text-lg text-gray-800">
+                    <p>
+                        大人になるにつれて置いてきたもの。<br>
+                        カッコつけて言えなくなった本音、泥臭い感情、衝動。
+                    </p>
+                    <p>
+                        「BEEKOALA」は、そんな日常に埋もれた<strong class="bg-punk-green px-1">青臭い感情を爆発させる</strong>ために結成した。<br>
+                        ジャンルは青春パンク。ただひたすらに、等身大の自分たちを鳴らす。
+                    </p>
+                    <p>
+                        綺麗な言葉はいらない。上手い演奏もいらない。<br>
+                        必要なのは、ライブハウスで拳を上げて、一緒に汗を流して、明日を少しだけマシにするための熱量だけだ。
+                    </p>
+                </div>
+                <div class="mt-8 flex justify-end">
+                    <span class="font-street text-3xl text-gray-400">WE ARE BEEKOALA</span>
+                </div>
+            </div>
         </div>
-        <p class="card-desc">画面左側にサイドバーメニューを固定。黒地のサイドバーと白のメインコンテンツのコントラストが際立つストリート系レイアウト。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    </section>
 
-    <a href="./samples/v2/sample3.html" class="sample-card v2s3">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V2 — Sample 03</div>
-        <div class="card-name">Split Layout</div>
-        <div class="card-tags">
-          <span class="tag">左右分割</span>
-          <span class="tag">スプリット</span>
-          <span class="tag">White</span>
+    <section id="media" class="py-20 px-4 bg-gray-50 border-b-4 border-punk-black">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-street text-5xl md:text-7xl text-punk-black text-outline-black text-white tracking-widest">
+                    WATCH THIS SHIT
+                </h2>
+                <div class="w-24 h-2 bg-punk-black mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- YouTube Block -->
+                <div class="bg-white p-5 border-4 border-punk-black solid-shadow">
+                    <div class="flex items-center justify-between mb-4 pb-2 border-b-2 border-gray-200">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-youtube text-3xl text-red-600"></i>
+                            <h3 class="font-street text-3xl pt-1">LATEST MUSIC VIDEO</h3>
+                        </div>
+                    </div>
+                    <div class="aspect-video bg-punk-black border-2 border-punk-black relative overflow-hidden group cursor-pointer">
+                        <img src="https://placehold.co/800x450/222222/ffffff?text=YouTube+Thumbnail" alt="MV Thumbnail" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 flex items-center justify-center transform group-hover:scale-110 transition-transform">
+                            <div class="bg-red-600 text-white w-16 h-12 flex items-center justify-center rounded-lg">
+                                <i class="fa-solid fa-play text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-bold text-lg">NEW SINGLE「青春の残骸」</p>
+                        <a href="#" class="text-sm font-bold text-punk-green bg-punk-black px-3 py-1 mt-2 inline-block hover:bg-gray-800">SUBSCRIBE CHANNEL</a>
+                    </div>
+                </div>
+
+                <!-- TikTok Block -->
+                <div class="bg-white p-5 border-4 border-punk-black solid-shadow">
+                    <div class="flex items-center justify-between mb-4 pb-2 border-b-2 border-gray-200">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-tiktok text-3xl text-punk-black"></i>
+                            <h3 class="font-street text-3xl pt-1">VIRAL SHORTS</h3>
+                        </div>
+                    </div>
+                    <div class="aspect-[9/16] max-h-[400px] mx-auto bg-black border-2 border-punk-black relative overflow-hidden flex items-center justify-center cursor-pointer group">
+                        <!-- TikTok風のUIオーバーレイ -->
+                        <div class="absolute right-4 bottom-20 flex flex-col gap-4 text-white z-10">
+                            <i class="fa-solid fa-heart text-3xl hover:text-red-500"></i>
+                            <i class="fa-solid fa-comment text-3xl"></i>
+                            <i class="fa-solid fa-share text-3xl"></i>
+                        </div>
+                        <p class="text-white font-street text-2xl tracking-widest z-10">PLAY TIKTOK</p>
+                        <img src="https://placehold.co/400x700/111111/39FF14?text=TikTok+Video" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity">
+                    </div>
+                    <div class="mt-4 text-center">
+                        <a href="#" class="font-bold text-punk-black hover:text-punk-green underline decoration-2 underline-offset-4">@beekoala_official をフォロー</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="card-desc">ヒーロー画像とテキストを左右に分割。各セクションも交互にスプリット配置することで、動的なリズム感と大胆なコントラストを演出。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    </section>
 
-    <a href="./samples/v2/sample4.html" class="sample-card v2s4">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V2 — Sample 04</div>
-        <div class="card-name">Asymmetric Grid</div>
-        <div class="card-tags">
-          <span class="tag">非対称</span>
-          <span class="tag">グリッド</span>
-          <span class="tag">White</span>
+    <section id="member" class="py-20 px-4 bg-white relative overflow-hidden">
+        <!-- ZINE風の装飾テキスト -->
+        <div class="absolute -left-10 top-20 transform -rotate-90 origin-left">
+            <span class="font-street text-6xl text-gray-100 whitespace-nowrap">WHO THE F*CK IS BEEKOALA?</span>
         </div>
-        <p class="card-desc">アシンメトリーな非対称グリッドレイアウト。カラム比が意図的にズレることで、バンドの不均一なエネルギーを視覚化する。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
 
-    <a href="./samples/v2/sample5.html" class="sample-card v2s5">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V2 — Sample 05</div>
-        <div class="card-name">Editorial</div>
-        <div class="card-tags">
-          <span class="tag">雑誌風</span>
-          <span class="tag">境界線なし</span>
-          <span class="tag">White</span>
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="flex flex-col items-center mb-16">
+                <h2 class="font-street text-5xl md:text-7xl text-punk-black tracking-widest">
+                    THE MEMBERS
+                </h2>
+                <div class="w-32 h-1 bg-punk-black mt-2"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Member 1 (Vo) -->
+                <div class="group flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-gray-50 border-4 border-punk-black p-4 solid-shadow">
+                    <div class="w-full sm:w-1/2 aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200 shrink-0">
+                        <img src="https://placehold.co/600x800/111111/ffffff?text=Vo.1" alt="Vocal 1" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
+                    </div>
+                    <div class="w-full sm:w-1/2 pt-2">
+                        <h3 class="font-street text-4xl text-punk-black">KENTA</h3>
+                        <p class="font-bold text-punk-green bg-punk-black inline-block px-2 py-0.5 text-sm mb-3">Vocal</p>
+                        <p class="text-sm font-medium leading-relaxed">
+                            バンドの心臓部となるメインボーカル。魂を削るようなハスキーボイスと、MCでの泥臭い言葉が武器。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Member 2 (Vo) -->
+                <div class="group flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-gray-50 border-4 border-punk-black p-4 solid-shadow-green md:mt-8">
+                    <div class="w-full sm:w-1/2 aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200 shrink-0">
+                        <img src="https://placehold.co/600x800/111111/ffffff?text=Vo.2" alt="Vocal 2" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
+                    </div>
+                    <div class="w-full sm:w-1/2 pt-2">
+                        <h3 class="font-street text-4xl text-punk-black">TAKERU</h3>
+                        <p class="font-bold text-white bg-punk-black inline-block px-2 py-0.5 text-sm mb-3">Vocal</p>
+                        <p class="text-sm font-medium leading-relaxed">
+                            もう一人のフロントマン。伸びやかな高音域と鋭いラップで、楽曲に爆発的な推進力をもたらす。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Member 3 (Gt) -->
+                <div class="group">
+                    <div class="border-4 border-punk-black aspect-[3/4] overflow-hidden mb-4 solid-shadow bg-gray-200">
+                        <img src="https://placehold.co/600x800/111111/ffffff?text=Gt" alt="Guitar" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
+                    </div>
+                    <div class="border-l-4 border-punk-black pl-4">
+                        <h3 class="font-street text-4xl text-punk-black">HIROKI</h3>
+                        <p class="font-bold text-gray-500 mb-2">Guitar / Chorus</p>
+                        <p class="text-sm font-medium leading-relaxed">
+                            攻撃的でエッジの効いたリフを刻むギターヒーロー。作詞作曲の要でもある。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Member 4 (Ba) -->
+                <div class="group md:mt-12">
+                    <div class="border-4 border-punk-black aspect-[3/4] overflow-hidden mb-4 solid-shadow-green bg-gray-200">
+                        <img src="https://placehold.co/600x800/111111/ffffff?text=Ba" alt="Bass" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
+                    </div>
+                    <div class="border-l-4 border-punk-green pl-4">
+                        <h3 class="font-street text-4xl text-punk-black">SHO</h3>
+                        <p class="font-bold text-gray-500 mb-2">Bass / Chorus</p>
+                        <p class="text-sm font-medium leading-relaxed">
+                            バンドのリーダー兼ムードメーカー。うねるベースラインでサウンドの土台を支える。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Member 5 (Dr) -->
+                <div class="group">
+                    <div class="border-4 border-punk-black aspect-[3/4] overflow-hidden mb-4 solid-shadow bg-gray-200">
+                        <img src="https://placehold.co/600x800/111111/ffffff?text=Dr" alt="Drums" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
+                    </div>
+                    <div class="border-l-4 border-punk-black pl-4">
+                        <h3 class="font-street text-4xl text-punk-black">RYU</h3>
+                        <p class="font-bold text-gray-500 mb-2">Drums / Chorus</p>
+                        <p class="text-sm font-medium leading-relaxed">
+                            圧倒的な手数とタイトなリズムキープ力を誇る。一番後ろからフロアを煽りまくる狂犬。
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="card-desc">セクションの境界線を持たない雑誌のようなエディトリアルレイアウト。コンテンツが自然に流れ込み、洗練されたストリートマガジン感を演出。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    </section>
 
-  </div>
-</div>
+    <section id="live" class="py-24 px-4 bg-punk-black text-white jagged-border">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col items-center mb-16">
+                <h2 class="font-street text-6xl md:text-8xl text-punk-green tracking-widest text-center">
+                    NEXT GIGS
+                </h2>
+                <p class="font-bold text-gray-400 mt-2 tracking-widest">LIVE SCHEDULE (Managed by microCMS)</p>
+            </div>
 
-<hr class="divider-line">
+            <!-- microCMSからのフェッチデータを展開するコンテナ想定 -->
+            <div id="microcms-live-list" class="space-y-6">
+                
+                <!-- microCMS Item Template -->
+                <div class="group bg-white text-punk-black border-4 border-punk-black p-5 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center solid-shadow hover:-translate-y-1 transition-transform">
+                    <div class="mb-6 md:mb-0 w-full md:w-2/3">
+                        <div class="flex items-baseline gap-3 mb-2">
+                            <!-- スタイリッシュな日付表示 (Bebas Neue) -->
+                            <span class="font-street text-4xl md:text-5xl text-punk-green tracking-wider pt-1">2024.11.15</span>
+                            <span class="font-street text-2xl text-gray-400">FRI</span>
+                        </div>
+                        <h3 class="font-bold text-xl md:text-2xl mb-2 line-clamp-2">
+                            PUNK ROCK REVOLUTION Vol.5
+                        </h3>
+                        <p class="text-gray-600 font-bold text-sm">
+                            <i class="fa-solid fa-location-dot mr-2 text-punk-green"></i>渋谷 CLUB QUATTRO
+                        </p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="text-xs font-bold bg-black text-white px-2 py-1">w/ THE GUEST BAND / and more</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://example.com/ticket" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto text-center font-street text-2xl tracking-wider bg-punk-green text-punk-black px-10 py-4 border-2 border-punk-black hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2">
+                        GET TICKETS <i class="fa-solid fa-arrow-right text-lg"></i>
+                    </a>
+                </div>
 
-<!-- ══ VERSION 1 ══ -->
-<div class="version-block">
-  <div class="version-heading">
-    <span class="version-label">Version 1</span>
-    <span class="version-badge">初期案</span>
-  </div>
-  <p class="version-note">ダーク背景テーマ — 5種類のデザイン</p>
-
-  <div class="samples-grid">
-
-    <a href="./samples/v1/sample1.html" class="sample-card v1s1 v1-card">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V1 — Sample 01</div>
-        <div class="card-name">Dark Minimal</div>
-        <div class="card-tags">
-          <span class="tag">Syne</span>
-          <span class="tag">DM Sans</span>
-          <span class="tag">Electric Lime</span>
+                <!-- Live Item 2 -->
+                <div class="group bg-white text-punk-black border-4 border-punk-black p-5 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center solid-shadow hover:-translate-y-1 transition-transform">
+                    <div class="mb-6 md:mb-0 w-full md:w-2/3">
+                        <div class="flex items-baseline gap-3 mb-2">
+                            <span class="font-street text-4xl md:text-5xl text-punk-green tracking-wider pt-1">2024.12.01</span>
+                            <span class="font-street text-2xl text-gray-400">SUN</span>
+                        </div>
+                        <h3 class="font-bold text-xl md:text-2xl mb-2 line-clamp-2">
+                            BEEKOALA 1st Album Release Tour "EUCALYPTUS"
+                        </h3>
+                        <p class="text-gray-600 font-bold text-sm">
+                            <i class="fa-solid fa-location-dot mr-2 text-punk-green"></i>福岡 CB
+                        </p>
+                        <div class="mt-3 flex gap-2">
+                            <span class="text-xs font-bold bg-punk-green text-punk-black px-2 py-1">ONE MAN LIVE</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://example.com/ticket" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto text-center font-street text-2xl tracking-wider bg-punk-green text-punk-black px-10 py-4 border-2 border-punk-black hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2">
+                        GET TICKETS <i class="fa-solid fa-arrow-right text-lg"></i>
+                    </a>
+                </div>
+                
+                <!-- Live Item 3 (Sold out) -->
+                <div class="bg-gray-200 text-gray-500 border-4 border-gray-400 p-5 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center relative overflow-hidden">
+                    <div class="absolute -right-12 top-8 bg-red-600 text-white font-street text-2xl py-1 px-16 transform rotate-45 shadow-lg tracking-widest">
+                        SOLD OUT
+                    </div>
+                    <div class="mb-6 md:mb-0 w-full md:w-2/3 opacity-70">
+                        <div class="flex items-baseline gap-3 mb-2">
+                            <span class="font-street text-4xl md:text-5xl tracking-wider pt-1">2024.12.24</span>
+                            <span class="font-street text-2xl">TUE</span>
+                        </div>
+                        <h3 class="font-bold text-xl md:text-2xl mb-2">
+                            CHRISTMAS PUNK NIGHT
+                        </h3>
+                        <p class="font-bold text-sm">
+                            <i class="fa-solid fa-location-dot mr-2"></i>大阪 BIGCAT
+                        </p>
+                    </div>
+                    
+                    <button disabled class="w-full md:w-auto text-center font-street text-2xl tracking-wider bg-gray-400 text-gray-600 px-10 py-4 border-2 border-gray-500 cursor-not-allowed">
+                        SOLD OUT
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block font-bold text-punk-green hover:text-white underline decoration-2 underline-offset-8 transition-colors">
+                    PAST LIVE ARCHIVE <i class="fa-solid fa-angle-right ml-1"></i>
+                </a>
+            </div>
         </div>
-        <p class="card-desc">漆黒の背景にエレクトリックライムのアクセント。カスタムカーソルとスムースなスクロールリビールが特徴のミニマル系。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    </section>
 
-    <a href="./samples/v1/sample2.html" class="sample-card v1s2 v1-card">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V1 — Sample 02</div>
-        <div class="card-name">Cyberpunk</div>
-        <div class="card-tags">
-          <span class="tag">Orbitron</span>
-          <span class="tag">Share Tech Mono</span>
-          <span class="tag">Neon</span>
+    <footer class="bg-white pt-16 pb-8 px-4 border-t-8 border-punk-black relative overflow-hidden">
+        <!-- 背景の大きなロゴマーク的なあしらい -->
+        <div class="absolute -bottom-20 -right-10 opacity-5 pointer-events-none">
+            <span class="font-street text-[15rem] leading-none">BKLA</span>
         </div>
-        <p class="card-desc">ピンク×シアンのネオン、スキャンラインオーバーレイ、グリッチエフェクト。SF的な未来感とエッジの効いた世界観。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
 
-    <a href="./samples/v1/sample3.html" class="sample-card v1s3 v1-card">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V1 — Sample 03</div>
-        <div class="card-name">Grunge Rock</div>
-        <div class="card-tags">
-          <span class="tag">Bebas Neue</span>
-          <span class="tag">Crimson Text</span>
-          <span class="tag">Blood Red</span>
+        <div class="max-w-6xl mx-auto flex flex-col items-center relative z-10">
+            <h2 class="font-street text-6xl md:text-8xl text-punk-black mb-8 tracking-widest">BEEKOALA</h2>
+            
+            <div class="flex space-x-8 mb-10">
+                <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 text-sm font-bold text-gray-800 mb-10">
+                <a href="#" class="hover:text-punk-green transition-colors">CONTACT</a>
+                <span class="hidden md:inline text-gray-300">|</span>
+                <a href="#" class="hover:text-punk-green transition-colors">MERCHANDISE</a>
+                <span class="hidden md:inline text-gray-300">|</span>
+                <a href="#" class="hover:text-punk-green transition-colors">PRIVACY POLICY</a>
+            </div>
+
+            <p class="text-punk-black font-street tracking-widest text-lg">
+                &copy; 2024 BEEKOALA. ALL RIGHTS RESERVED.
+            </p>
         </div>
-        <p class="card-desc">ダークブラウン×ブラッドレッドのグランジ。フィルムグレインとスクラッチライン、ドロップキャップで荒削りな質感を演出。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    </footer>
 
-    <a href="./samples/v1/sample4.html" class="sample-card v1s4 v1-card">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V1 — Sample 04</div>
-        <div class="card-name">Modern Brutalism</div>
-        <div class="card-tags">
-          <span class="tag">Black Han Sans</span>
-          <span class="tag">Space Mono</span>
-          <span class="tag">Yellow</span>
-        </div>
-        <p class="card-desc">白黒×イエローの太ボーダーグリッド。情報を剥き出しにするブルータリズム。圧倒的な存在感と視認性。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
+    <script>
+        // スムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-    <a href="./samples/v1/sample5.html" class="sample-card v1s5 v1-card">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-num">V1 — Sample 05</div>
-        <div class="card-name">Elegant Dark</div>
-        <div class="card-tags">
-          <span class="tag">Cormorant Garamond</span>
-          <span class="tag">Raleway</span>
-          <span class="tag">Gold</span>
-        </div>
-        <p class="card-desc">アンティークゴールドとネイビーブラック。ゴールドのオーナメント装飾と優雅なタイポグラフィで格調高い世界観を表現。</p>
-        <span class="card-link">このデザインを見る</span>
-      </div>
-    </a>
-
-  </div>
-</div>
-
-<p class="footer-note">&copy; 2026 Beekoala — Internal Design Portal</p>
-
+        // スクロール時のヘッダー影追加
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
 </body>
 </html>
