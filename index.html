@@ -247,6 +247,28 @@
             color: #666;
             margin-top: 0.5rem;
         }
+
+        /* モバイルメニュー */
+        #mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: #fff;
+            border-top: 4px solid #111111;
+        }
+        #mobile-menu.open {
+            display: flex;
+        }
+        #mobile-menu a {
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid #eee;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            color: #111111;
+            text-decoration: none;
+        }
+        #mobile-menu a:hover {
+            background: #39FF14;
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-punk-green selection:text-punk-black">
@@ -269,7 +291,7 @@
                     
                     <div class="w-px h-6 bg-gray-300 mx-2"></div>
                     
-                    <a href="#" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
+                    <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
                         <i class="fa-brands fa-tiktok"></i>
                     </a>
                     <a href="#" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
@@ -285,11 +307,18 @@
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button class="text-punk-black focus:outline-none p-2 border-2 border-punk-black bg-punk-green">
+                    <button id="mobile-menu-btn" class="text-punk-black focus:outline-none p-2 border-2 border-punk-black bg-punk-green" aria-expanded="false" aria-controls="mobile-menu" aria-label="メニューを開く">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden">
+            <a href="#philosophy">PHILOSOPHY</a>
+            <a href="#media">MEDIA</a>
+            <a href="#member">MEMBER</a>
+            <a href="#live">TICKETS</a>
+            <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer">TIKTOK</a>
         </div>
     </nav>
 
@@ -526,7 +555,7 @@
             <h2 class="font-street text-6xl md:text-8xl text-punk-black mb-8 tracking-widest">BEEKOALA</h2>
             
             <div class="flex space-x-8 mb-10">
-                <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-youtube"></i></a>
                 <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-instagram"></i></a>
                 <a href="#" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-x-twitter"></i></a>
@@ -573,6 +602,20 @@
             } else {
                 nav.classList.remove('shadow-md');
             }
+        });
+
+        // モバイルメニューの開閉
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            menuBtn.setAttribute('aria-expanded', isOpen);
+        });
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuBtn.setAttribute('aria-expanded', 'false');
+            });
         });
     </script>
 </body>
