@@ -158,6 +158,95 @@
             color: #D6001C;
             font-weight: 700;
         }
+
+        /* Live: Upcoming */
+        .event-card {
+            background: #fff;
+            border: 4px solid #111111;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 8px 8px 0 #39FF14;
+        }
+        .event-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            border: 2px solid #111111;
+        }
+        .event-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .event-date {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: #111111;
+        }
+        .event-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+        .event-venue, .event-time, .event-price, .event-contact {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 0.25rem;
+        }
+        .event-cast {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 2px dashed #111111;
+        }
+        .event-cast-label {
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: #111111;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Live: Archive */
+        .archive-card {
+            background: #f5f5f5;
+            border: 2px solid #111111;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+            opacity: 0.85;
+        }
+        .archive-img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+        .archive-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(60%);
+        }
+        .archive-info {
+            padding: 1rem;
+        }
+        .archive-date {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #888;
+        }
+        .archive-title {
+            font-weight: 700;
+            margin: 0.25rem 0;
+        }
+        .archive-venue {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .archive-quote {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-punk-green selection:text-punk-black">
@@ -406,7 +495,7 @@
     </section>
 
     <section id="live" class="py-24 px-4 bg-punk-black text-white jagged-border">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-6xl mx-auto">
             <div class="flex flex-col items-center mb-16">
                 <h2 class="font-street text-6xl md:text-8xl text-punk-green tracking-widest text-center">
                     NEXT GIGS
@@ -414,84 +503,15 @@
                 <p class="font-bold text-gray-400 mt-2 tracking-widest">LIVE SCHEDULE (Managed by microCMS)</p>
             </div>
 
-            <!-- microCMSからのフェッチデータを展開するコンテナ想定 -->
-            <div id="microcms-live-list" class="space-y-6">
-                
-                <!-- microCMS Item Template -->
-                <div class="group bg-white text-punk-black border-4 border-punk-black p-5 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center solid-shadow hover:-translate-y-1 transition-transform">
-                    <div class="mb-6 md:mb-0 w-full md:w-2/3">
-                        <div class="flex items-baseline gap-3 mb-2">
-                            <!-- スタイリッシュな日付表示 (Bebas Neue) -->
-                            <span class="font-street text-4xl md:text-5xl text-punk-green tracking-wider pt-1">2024.11.15</span>
-                            <span class="font-street text-2xl text-gray-400">FRI</span>
-                        </div>
-                        <h3 class="font-bold text-xl md:text-2xl mb-2 line-clamp-2">
-                            PUNK ROCK REVOLUTION Vol.5
-                        </h3>
-                        <p class="text-gray-600 font-bold text-sm">
-                            <i class="fa-solid fa-location-dot mr-2 text-punk-green"></i>渋谷 CLUB QUATTRO
-                        </p>
-                        <div class="mt-3 flex gap-2">
-                            <span class="text-xs font-bold bg-black text-white px-2 py-1">w/ THE GUEST BAND / and more</span>
-                        </div>
-                    </div>
-                    
-                    <a href="https://example.com/ticket" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto text-center font-street text-2xl tracking-wider bg-punk-green text-punk-black px-10 py-4 border-2 border-punk-black hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2">
-                        GET TICKETS <i class="fa-solid fa-arrow-right text-lg"></i>
-                    </a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="font-street text-3xl text-punk-green tracking-widest mb-6">UPCOMING LIVE</h3>
+                    <div id="upcoming-list"></div>
                 </div>
-
-                <!-- Live Item 2 -->
-                <div class="group bg-white text-punk-black border-4 border-punk-black p-5 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center solid-shadow hover:-translate-y-1 transition-transform">
-                    <div class="mb-6 md:mb-0 w-full md:w-2/3">
-                        <div class="flex items-baseline gap-3 mb-2">
-                            <span class="font-street text-4xl md:text-5xl text-punk-green tracking-wider pt-1">2024.12.01</span>
-                            <span class="font-street text-2xl text-gray-400">SUN</span>
-                        </div>
-                        <h3 class="font-bold text-xl md:text-2xl mb-2 line-clamp-2">
-                            BEEKOALA 1st Album Release Tour "EUCALYPTUS"
-                        </h3>
-                        <p class="text-gray-600 font-bold text-sm">
-                            <i class="fa-solid fa-location-dot mr-2 text-punk-green"></i>福岡 CB
-                        </p>
-                        <div class="mt-3 flex gap-2">
-                            <span class="text-xs font-bold bg-punk-green text-punk-black px-2 py-1">ONE MAN LIVE</span>
-                        </div>
-                    </div>
-                    
-                    <a href="https://example.com/ticket" target="_blank" rel="noopener noreferrer" class="w-full md:w-auto text-center font-street text-2xl tracking-wider bg-punk-green text-punk-black px-10 py-4 border-2 border-punk-black hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2">
-                        GET TICKETS <i class="fa-solid fa-arrow-right text-lg"></i>
-                    </a>
+                <div>
+                    <h3 class="font-street text-3xl text-gray-400 tracking-widest mb-6">LIVE ARCHIVE</h3>
+                    <div id="archive-list"></div>
                 </div>
-                
-                <!-- Live Item 3 (Sold out) -->
-                <div class="bg-gray-200 text-gray-500 border-4 border-gray-400 p-5 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center relative overflow-hidden">
-                    <div class="absolute -right-12 top-8 bg-red-600 text-white font-street text-2xl py-1 px-16 transform rotate-45 shadow-lg tracking-widest">
-                        SOLD OUT
-                    </div>
-                    <div class="mb-6 md:mb-0 w-full md:w-2/3 opacity-70">
-                        <div class="flex items-baseline gap-3 mb-2">
-                            <span class="font-street text-4xl md:text-5xl tracking-wider pt-1">2024.12.24</span>
-                            <span class="font-street text-2xl">TUE</span>
-                        </div>
-                        <h3 class="font-bold text-xl md:text-2xl mb-2">
-                            CHRISTMAS PUNK NIGHT
-                        </h3>
-                        <p class="font-bold text-sm">
-                            <i class="fa-solid fa-location-dot mr-2"></i>大阪 BIGCAT
-                        </p>
-                    </div>
-                    
-                    <button disabled class="w-full md:w-auto text-center font-street text-2xl tracking-wider bg-gray-400 text-gray-600 px-10 py-4 border-2 border-gray-500 cursor-not-allowed">
-                        SOLD OUT
-                    </button>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="#" class="inline-block font-bold text-punk-green hover:text-white underline decoration-2 underline-offset-8 transition-colors">
-                    PAST LIVE ARCHIVE <i class="fa-solid fa-angle-right ml-1"></i>
-                </a>
             </div>
         </div>
     </section>
@@ -527,6 +547,7 @@
     </footer>
 
     <script src="./assets/js/youtube-fetch.js"></script>
+    <script src="./assets/js/live-fetch.js"></script>
     <script>
         // スムーススクロール
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
