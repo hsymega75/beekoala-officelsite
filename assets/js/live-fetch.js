@@ -52,9 +52,14 @@ function renderUpcoming(events) {
       ? '<div class="event-cast"><span class="event-cast-label">Cast</span>'
         + '<p>' + esc(ev.cast).replace(/\n/g, '<br>') + '</p></div>'
       : '';
-    var contactHtml = ev.contact
-      ? '<div class="event-contact">' + esc(ev.contact) + '</div>'
-      : '';
+    var contactHtml = '';
+    if (ev.contact) {
+      if (/^https?:\/\//.test(ev.contact)) {
+        contactHtml = '<a class="event-contact-btn" href="' + esc(ev.contact) + '" target="_blank" rel="noopener noreferrer">チケット購入はこちら</a>';
+      } else {
+        contactHtml = '<div class="event-contact">' + esc(ev.contact) + '</div>';
+      }
+    }
     var priceHtml = ev.price
       ? '<div class="event-price">' + esc(ev.price) + '</div>'
       : '';
