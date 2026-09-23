@@ -379,47 +379,27 @@
 
  <!-- メディア -->   
     <section id="media" class="py-20 px-4 bg-gray-50 border-b-4 border-punk-black">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-4xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="font-street text-5xl md:text-7xl text-punk-black text-outline-black text-white tracking-widest">
                     WATCH THIS SHIT
                 </h2>
                 <div class="w-24 h-2 bg-punk-black mx-auto mt-4"></div>
+                <p class="mt-6 font-bold text-gray-700 tracking-wide">新曲から過去の名曲まで、全部YouTubeでチェックできる。</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <!-- YouTube Block (microCMS 動的連携) -->
-                <div class="bg-white p-5 border-4 border-punk-black solid-shadow">
-                    <div class="flex items-center justify-between mb-4 pb-2 border-b-2 border-gray-200">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-brands fa-youtube text-3xl text-red-600"></i>
-                            <h3 class="font-street text-3xl pt-1">MUSIC VIDEOS</h3>
-                        </div>
+            <div class="bg-white p-5 border-4 border-punk-black solid-shadow">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b-2 border-gray-200">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-brands fa-youtube text-3xl text-red-600"></i>
+                        <h3 class="font-street text-3xl pt-1">MUSIC VIDEOS</h3>
                     </div>
-                    <div id="youtube-list"></div>
                 </div>
-
-                <!-- TikTok Block -->
-                <div class="bg-white p-5 border-4 border-punk-black solid-shadow">
-                    <div class="flex items-center justify-between mb-4 pb-2 border-b-2 border-gray-200">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-brands fa-tiktok text-3xl text-punk-black"></i>
-                            <h3 class="font-street text-3xl pt-1">VIRAL SHORTS</h3>
-                        </div>
-                    </div>
-                    <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer" class="aspect-[9/16] max-h-[400px] mx-auto bg-black border-2 border-punk-black relative overflow-hidden flex items-center justify-center cursor-pointer group">
-                        <!-- TikTok風のUIオーバーレイ -->
-                        <div class="absolute right-4 bottom-20 flex flex-col gap-4 text-white z-10">
-                            <i class="fa-solid fa-heart text-3xl group-hover:text-red-500"></i>
-                            <i class="fa-solid fa-comment text-3xl"></i>
-                            <i class="fa-solid fa-share text-3xl"></i>
-                        </div>
-                        <p class="text-white font-street text-2xl tracking-widest z-10">VIEW ON TIKTOK</p>
-                        <img src="./images/top-band.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity">
+                <div id="youtube-list"></div>
+                <div class="mt-6 text-center">
+                    <a href="https://www.youtube.com/@BEEKOALA05" target="_blank" rel="noopener noreferrer" class="inline-block font-street text-xl tracking-widest bg-red-600 text-white py-3 px-8 border-2 border-punk-black solid-shadow hover:bg-punk-black transition-colors">
+                        SUBSCRIBE CHANNEL
                     </a>
-                    <div class="mt-4 text-center">
-                        <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer" class="font-bold text-punk-black hover:text-punk-green underline decoration-2 underline-offset-4">TikTokをフォローする</a>
-                    </div>
                 </div>
             </div>
         </div>
