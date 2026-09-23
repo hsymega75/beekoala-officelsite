@@ -212,6 +212,45 @@
         .event-contact-btn:hover {
             opacity: 0.85;
         }
+
+        /* Goods セクション: 横スクロールカテゴリカード */
+        .goods-scroll {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .goods-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+        .goods-card {
+            flex: 0 0 auto;
+            width: 160px;
+            scroll-snap-align: start;
+            background: #fff;
+            border: 4px solid #111111;
+            padding: 2rem 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: #111111;
+            transition: transform 0.2s ease-in-out;
+        }
+        .goods-card:hover {
+            transform: translateY(-4px);
+        }
+        .goods-card i {
+            font-size: 2.5rem;
+            color: #39FF14;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .goods-card span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+        }
         .event-cast {
             margin-top: 0.75rem;
             padding-top: 0.75rem;
@@ -516,12 +555,34 @@
     </section>
      <!-- グッズ -->  
     <section id="goods" class="py-20 px-4 bg-gray-50 border-b-4 border-punk-black">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-white p-8 md:p-12 border-4 border-punk-black solid-shadow text-center">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-10">
                 <p class="font-street text-xl text-punk-green tracking-widest mb-3">OFFICIAL GOODS</p>
-                <h2 class="font-street text-4xl md:text-5xl text-punk-black tracking-wider mb-8">SUZURIでグッズ販売中</h2>
-                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="inline-block font-street text-2xl tracking-widest bg-punk-black text-white py-4 px-10 border-2 border-punk-black solid-shadow-green hover:bg-punk-green hover:text-punk-black transition-colors">
-                    SHOP ON SUZURI
+                <h2 class="font-street text-4xl md:text-5xl text-punk-black tracking-wider">グッズをチェック</h2>
+            </div>
+
+            <div class="goods-scroll">
+                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="goods-card">
+                    <i class="fa-solid fa-note-sticky"></i>
+                    <span>ステッカー</span>
+                </a>
+                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="goods-card">
+                    <i class="fa-solid fa-shirt"></i>
+                    <span>オリジナルTシャツ</span>
+                </a>
+                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="goods-card">
+                    <i class="fa-solid fa-key"></i>
+                    <span>キーホルダー</span>
+                </a>
+                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="goods-card">
+                    <i class="fa-solid fa-shoe-prints"></i>
+                    <span>サンダル</span>
+                </a>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-punk-black hover:text-punk-green underline decoration-2 underline-offset-4">
+                    → SUZURIで全商品を見る
                 </a>
             </div>
         </div>
