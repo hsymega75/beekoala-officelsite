@@ -256,6 +256,49 @@
             margin-top: 0.5rem;
         }
 
+        /* SNS セクション */
+        .sns-card {
+            background: #111111;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border: 4px solid #111111;
+            transition: transform 0.2s ease-in-out;
+        }
+        .sns-card:hover {
+            transform: translateY(-4px);
+        }
+        .sns-card i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .sns-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.1em;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+        .sns-btn {
+            display: inline-block;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            padding: 0.75rem 1.5rem;
+            color: #111111;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .sns-btn:hover {
+            opacity: 0.85;
+        }
+        .sns-tiktok i { color: #39FF14; }
+        .sns-tiktok .sns-btn { background: #39FF14; }
+        .sns-youtube i { color: #FF0000; }
+        .sns-youtube .sns-btn { background: #FF0000; }
+        .sns-instagram i { color: #E1306C; }
+        .sns-instagram .sns-btn { background: #E1306C; }
+
         /* モバイルメニュー */
         #mobile-menu {
             display: none;
@@ -404,7 +447,37 @@
             </div>
         </div>
     </section>
-     <!-- ライブ情報 -->  
+    <!-- SNS -->
+    <section id="sns" class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-street text-5xl md:text-7xl text-punk-black tracking-widest">
+                    FOLLOW THE NOISE
+                </h2>
+                <div class="w-24 h-2 bg-punk-black mx-auto mt-4"></div>
+                <p class="mt-6 font-bold text-gray-700 tracking-wide">ライブの裏側も、日常の全部も、SNSで。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="sns-card sns-tiktok">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <h3>TIKTOK</h3>
+                    <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer" class="sns-btn">FOLLOW ON TIKTOK</a>
+                </div>
+                <div class="sns-card sns-youtube">
+                    <i class="fa-brands fa-youtube"></i>
+                    <h3>YOUTUBE</h3>
+                    <a href="https://www.youtube.com/@BEEKOALA05" target="_blank" rel="noopener noreferrer" class="sns-btn">SUBSCRIBE ON YOUTUBE</a>
+                </div>
+                <div class="sns-card sns-instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                    <h3>INSTAGRAM</h3>
+                    <a href="https://www.instagram.com/beekoala05?stkn=NHI0Nzl4bXQwNjE2&utm_source=qr" target="_blank" rel="noopener noreferrer" class="sns-btn">FOLLOW ON INSTAGRAM</a>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- ライブ情報 -->
     <section id="live" class="py-24 px-4 bg-punk-black text-white jagged-border">
         <div class="max-w-6xl mx-auto">
             <div class="flex flex-col items-center mb-16">
