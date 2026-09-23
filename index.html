@@ -84,6 +84,11 @@
         .jagged-border {
             border-bottom: 4px dashed #111;
         }
+
+        /* オートハイドヘッダー */
+        #navbar.nav-hidden {
+            transform: translateY(-100%);
+        }
         
         /* カスタムスクロールバー */
         ::-webkit-scrollbar {
@@ -405,8 +410,8 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="font-street text-4xl tracking-wider text-punk-black hover:text-punk-green transition-colors mt-2">
-                        BEEKOALA
+                    <a href="#" class="flex items-center hover:opacity-80 transition-opacity">
+                        <img src="./images/logoImage.svg" alt="BEEKOALA" class="h-10 w-auto">
                     </a>
                 </div>
                 
@@ -481,14 +486,14 @@
     </header>
 
  <!-- メディア -->   
-    <section id="media" class="py-20 px-4 bg-gray-50 border-b-4 border-punk-black">
+    <section id="media" class="py-20 px-4 bg-punk-black text-white jagged-border">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="font-street text-5xl md:text-7xl text-punk-black text-outline-black text-white tracking-widest">
+                <h2 class="font-street text-5xl md:text-7xl text-punk-green tracking-widest">
                     WATCH THIS SHIT
                 </h2>
-                <div class="w-24 h-2 bg-punk-black mx-auto mt-4"></div>
-                <p class="mt-6 font-bold text-gray-700 tracking-wide">新曲から過去の名曲まで、全部YouTubeでチェックできる。</p>
+                <div class="w-24 h-2 bg-punk-green mx-auto mt-4"></div>
+                <p class="mt-6 font-bold text-gray-400 tracking-wide">新曲から過去の名曲まで、全部YouTubeでチェックできる。</p>
             </div>
 
             <div class="bg-white p-5 border-4 border-punk-black solid-shadow">
@@ -593,44 +598,44 @@
         </div>
     </section>
  <!-- メンバー -->   
-    <section id="member" class="py-20 px-4 bg-white relative overflow-hidden">
+    <section id="member" class="py-20 px-4 bg-punk-black text-white jagged-border relative overflow-hidden">
         <!-- ZINE風の装飾テキスト -->
-        <div class="absolute -left-10 top-20 transform -rotate-90 origin-left">
-            <span class="font-street text-6xl text-gray-100 whitespace-nowrap">WHO THE F*CK IS BEEKOALA?</span>
+        <div class="absolute -left-10 top-20 transform -rotate-90 origin-left opacity-5">
+            <span class="font-street text-6xl text-white whitespace-nowrap">WHO THE F*CK IS BEEKOALA?</span>
         </div>
 
         <div class="max-w-6xl mx-auto relative z-10">
             <div class="flex flex-col items-center mb-16">
-                <h2 class="font-street text-5xl md:text-7xl text-punk-black tracking-widest">
+                <h2 class="font-street text-5xl md:text-7xl text-punk-green tracking-widest">
                     THE MEMBERS
                 </h2>
-                <div class="w-32 h-1 bg-punk-black mt-2"></div>
+                <div class="w-32 h-1 bg-punk-green mt-2"></div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                 <!-- タカ (Vo) -->
-                <div class="group flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-gray-50 border-4 border-punk-black p-4 solid-shadow">
-                    <div class="w-full sm:w-1/2 aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200 shrink-0">
+                <div class="group bg-[#F87171] border-4 border-punk-black p-4 solid-shadow">
+                    <div class="aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200">
                         <img src="./images/member1.jpg" alt="vo.タカ" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
                     </div>
-                    <div class="w-full sm:w-1/2 pt-2">
+                    <div class="pt-4">
                         <h3 class="font-street text-4xl text-punk-black">タカ</h3>
                         <p class="font-bold text-punk-green bg-punk-black inline-block px-2 py-0.5 text-sm mb-3">vo.</p>
-                        <p class="text-sm font-medium leading-relaxed">
+                        <p class="text-sm font-medium leading-relaxed text-punk-black">
                             巻き肩のロングヘアー。
                         </p>
                     </div>
                 </div>
 
                 <!-- ヒガ (Vo) -->
-                <div class="group flex flex-col sm:flex-row gap-6 items-center sm:items-start bg-gray-50 border-4 border-punk-black p-4 solid-shadow-green md:mt-8">
-                    <div class="w-full sm:w-1/2 aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200 shrink-0">
+                <div class="group bg-[#F472B6] border-4 border-punk-black p-4 solid-shadow-green md:mt-8">
+                    <div class="aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200">
                         <img src="./images/member2.jpg" alt="vo.ヒガ" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
                     </div>
-                    <div class="w-full sm:w-1/2 pt-2">
+                    <div class="pt-4">
                         <h3 class="font-street text-4xl text-punk-black">ヒガ</h3>
                         <p class="font-bold text-white bg-punk-black inline-block px-2 py-0.5 text-sm mb-3">vo.</p>
-                        <p class="text-sm font-medium leading-relaxed">
+                        <p class="text-sm font-medium leading-relaxed text-punk-black">
                             小さなオシャレ番長。
                         </p>
                     </div>
@@ -639,42 +644,42 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- ノムさん (Gt) -->
-                <div class="group">
-                    <div class="border-4 border-punk-black aspect-[3/4] overflow-hidden mb-4 solid-shadow bg-gray-200">
+                <div class="group bg-[#FACC15] border-4 border-punk-black p-4 solid-shadow">
+                    <div class="aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200">
                         <img src="./images/member3.jpg" alt="gt.ノムさん" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
                     </div>
-                    <div class="border-l-4 border-punk-black pl-4">
+                    <div class="pt-4">
                         <h3 class="font-street text-4xl text-punk-black">ノムさん</h3>
-                        <p class="font-bold text-gray-500 mb-2">gt.</p>
-                        <p class="text-sm font-medium leading-relaxed">
+                        <p class="font-bold text-[#FACC15] bg-punk-black inline-block px-2 py-0.5 text-sm mb-3">gt.</p>
+                        <p class="text-sm font-medium leading-relaxed text-punk-black">
                             ヒゲのサウンドメーカー。
                         </p>
                     </div>
                 </div>
 
                 <!-- ゴー (Ba) -->
-                <div class="group md:mt-12">
-                    <div class="border-4 border-punk-black aspect-[3/4] overflow-hidden mb-4 solid-shadow-green bg-gray-200">
+                <div class="group bg-[#22D3EE] border-4 border-punk-black p-4 solid-shadow-green md:mt-12">
+                    <div class="aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200">
                         <img src="./images/member4.jpg" alt="ba.ゴー" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
                     </div>
-                    <div class="border-l-4 border-punk-green pl-4">
+                    <div class="pt-4">
                         <h3 class="font-street text-4xl text-punk-black">ゴー</h3>
-                        <p class="font-bold text-gray-500 mb-2">ba.</p>
-                        <p class="text-sm font-medium leading-relaxed">
+                        <p class="font-bold text-[#22D3EE] bg-punk-black inline-block px-2 py-0.5 text-sm mb-3">ba.</p>
+                        <p class="text-sm font-medium leading-relaxed text-punk-black">
                             野球を愛するカメラマン。
                         </p>
                     </div>
                 </div>
 
                 <!-- タダちゃん (Dr) -->
-                <div class="group">
-                    <div class="border-4 border-punk-black aspect-[3/4] overflow-hidden mb-4 solid-shadow bg-gray-200">
+                <div class="group bg-[#4ADE80] border-4 border-punk-black p-4 solid-shadow">
+                    <div class="aspect-[3/4] overflow-hidden border-2 border-punk-black bg-gray-200">
                         <img src="./images/member5.jpg" alt="dr.タダちゃん" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500">
                     </div>
-                    <div class="border-l-4 border-punk-black pl-4">
+                    <div class="pt-4">
                         <h3 class="font-street text-4xl text-punk-black">タダちゃん</h3>
-                        <p class="font-bold text-gray-500 mb-2">dr.</p>
-                        <p class="text-sm font-medium leading-relaxed">
+                        <p class="font-bold text-[#4ADE80] bg-punk-black inline-block px-2 py-0.5 text-sm mb-3">dr.</p>
+                        <p class="text-sm font-medium leading-relaxed text-punk-black">
                             機材オタクのアレンジャー。
                         </p>
                     </div>
@@ -683,23 +688,23 @@
         </div>
     </section>
 <!-- エピソード -->
-    <section id="philosophy" class="py-20 px-4 bg-punk-black text-white jagged-border relative">
+    <section id="philosophy" class="py-20 px-4 bg-white text-punk-black relative">
         <!-- 背景の透かし文字 -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center opacity-5">
-            <span class="font-street text-[20vw] leading-none text-white whitespace-nowrap">PHILOSOPHY</span>
+            <span class="font-street text-[20vw] leading-none text-punk-black whitespace-nowrap">PHILOSOPHY</span>
         </div>
-        
+
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="flex items-center gap-4 mb-10">
                 <div class="w-12 h-1 bg-punk-green"></div>
                 <h2 class="font-street text-5xl md:text-6xl text-punk-green tracking-wider pt-2">OUR PHILOSOPHY</h2>
             </div>
-            
-            <div class="bg-white text-punk-black p-8 md:p-12 border-4 border-punk-green solid-shadow-green transform rotate-1">
-                <h3 class="font-bold text-2xl md:text-3xl mb-6 border-b-2 border-punk-black pb-4 inline-block">
+
+            <div class="bg-punk-black text-white p-8 md:p-12 border-4 border-punk-green solid-shadow-green transform rotate-1">
+                <h3 class="font-bold text-2xl md:text-3xl mb-6 border-b-2 border-punk-green pb-4 inline-block">
                     俺たちの青春は、まだ終わってない。
                 </h3>
-                <div class="space-y-6 font-medium leading-loose text-lg text-gray-800">
+                <div class="space-y-6 font-medium leading-loose text-lg text-gray-300">
                     <p>
                         今から20年前、学生時代に「Beep」としてバンド活動をスタートした。<br>
                         タカ、ヒガ、ゴー、ノムさん——音楽でつながった仲間たちがいた。
@@ -709,7 +714,7 @@
                         それぞれが、それぞれの道を歩き出した。
                     </p>
                     <p>
-                        そして20年後——タカの<strong class="bg-punk-green px-1">「またバンドやろうや」</strong>の一言から、再結成が動き出した。<br>
+                        そして20年後——タカの<strong class="bg-punk-green px-1 text-punk-black">「またバンドやろうや」</strong>の一言から、再結成が動き出した。<br>
                         新たな仲間・タダちゃんを迎え、「BEEKOALA」として福岡から再始動する。眠り続けていた名曲たちが、今、また鳴り響く。
                     </p>
                 </div>
@@ -720,30 +725,30 @@
         </div>
     </section>
 
-    <footer class="bg-white pt-16 pb-8 px-4 border-t-8 border-punk-black relative overflow-hidden">
+    <footer class="bg-punk-black text-white pt-16 pb-8 px-4 border-t-8 border-punk-green relative overflow-hidden">
         <!-- 背景の大きなロゴマーク的なあしらい -->
         <div class="absolute -bottom-20 -right-10 opacity-5 pointer-events-none">
             <span class="font-street text-[15rem] leading-none">BKLA</span>
         </div>
 
         <div class="max-w-6xl mx-auto flex flex-col items-center relative z-10">
-            <h2 class="font-street text-6xl md:text-8xl text-punk-black mb-8 tracking-widest">BEEKOALA</h2>
-            
+            <h2 class="font-street text-6xl md:text-8xl text-punk-green mb-8 tracking-widest">BEEKOALA</h2>
+
             <div class="flex space-x-8 mb-10">
-                <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://www.youtube.com/@BEEKOALA05" target="_blank" rel="noopener noreferrer" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.instagram.com/beekoala05?stkn=NHI0Nzl4bXQwNjE2&utm_source=qr" target="_blank" rel="noopener noreferrer" class="text-4xl text-punk-black hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@user3920562792656" target="_blank" rel="noopener noreferrer" class="text-4xl text-white hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@BEEKOALA05" target="_blank" rel="noopener noreferrer" class="text-4xl text-white hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.instagram.com/beekoala05?stkn=NHI0Nzl4bXQwNjE2&utm_source=qr" target="_blank" rel="noopener noreferrer" class="text-4xl text-white hover:text-punk-green hover:-translate-y-2 transition-all"><i class="fa-brands fa-instagram"></i></a>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-6 text-sm font-bold text-gray-800 mb-10">
+            <div class="flex flex-wrap justify-center gap-6 text-sm font-bold text-gray-300 mb-10">
                 <a href="#" class="hover:text-punk-green transition-colors">CONTACT</a>
-                <span class="hidden md:inline text-gray-300">|</span>
+                <span class="hidden md:inline text-gray-600">|</span>
                 <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="hover:text-punk-green transition-colors">MERCHANDISE</a>
-                <span class="hidden md:inline text-gray-300">|</span>
+                <span class="hidden md:inline text-gray-600">|</span>
                 <a href="#" class="hover:text-punk-green transition-colors">PRIVACY POLICY</a>
             </div>
 
-            <p class="text-punk-black font-street tracking-widest text-lg">
+            <p class="text-gray-400 font-street tracking-widest text-lg">
                 &copy; 2024 BEEKOALA. ALL RIGHTS RESERVED.
             </p>
         </div>
@@ -768,14 +773,31 @@
             });
         });
 
-        // スクロール時のヘッダー影追加
+        // スクロール時のヘッダー影追加・オートハイド
+        let lastScrollY = window.scrollY;
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > 50) {
                 nav.classList.add('shadow-md');
             } else {
                 nav.classList.remove('shadow-md');
             }
+
+            const mobileMenuEl = document.getElementById('mobile-menu');
+            if (mobileMenuEl && mobileMenuEl.classList.contains('open')) {
+                lastScrollY = currentScrollY;
+                return;
+            }
+
+            if (currentScrollY > lastScrollY && currentScrollY > 80) {
+                nav.classList.add('nav-hidden');
+            } else {
+                nav.classList.remove('nav-hidden');
+            }
+
+            lastScrollY = currentScrollY;
         });
 
         // モバイルメニューの開閉
