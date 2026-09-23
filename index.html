@@ -277,6 +277,22 @@
         #mobile-menu a:hover {
             background: #39FF14;
         }
+
+        /* Heroのアー写: スマホは枠なし、デスクトップ(md以上)は黒枠+影 */
+        .hero-photo-frame {
+            border: none;
+        }
+        @media (min-width: 768px) {
+            .hero-photo-frame {
+                border: 4px solid #111111;
+                box-shadow: 8px 8px 0px 0px #111111;
+                transition: all 0.2s ease-in-out;
+            }
+            .hero-photo-frame:hover {
+                transform: translate(4px, 4px);
+                box-shadow: 4px 4px 0px 0px #111111;
+            }
+        }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden selection:bg-punk-green selection:text-punk-black">
@@ -306,7 +322,7 @@
                     <a href="#" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
                         <i class="fa-brands fa-youtube"></i>
                     </a>
-                    <a href="#" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
+                    <a href="https://www.instagram.com/beekoala05?stkn=NHI0Nzl4bXQwNjE2&utm_source=qr" class="text-2xl text-punk-black hover:text-punk-green hover:-rotate-12 transition-transform duration-200">
                         <i class="fa-brands fa-instagram"></i>
                     </a>
                     <a href="#live" class="ml-4 font-street text-xl bg-punk-black text-white py-1 px-6 border-2 border-punk-black solid-shadow-green tracking-widest hover:bg-punk-green hover:text-punk-black transition-colors">
@@ -332,14 +348,14 @@
         </div>
     </nav>
 
-    <header class="pt-28 pb-16 px-4 relative overflow-hidden bg-white">
+    <header class="pt-20 md:pt-28 pb-16 relative overflow-hidden bg-white">
         <div class="max-w-7xl mx-auto relative flex flex-col md:flex-row items-center gap-8">
             <!-- 背景の装飾 -->
             <div class="absolute top-10 right-10 w-64 h-64 bg-punk-green rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
             
             <!-- アー写コンテナ -->
-            <div class="w-full md:w-2/3 relative border-4 border-punk-black solid-shadow bg-gray-200 aspect-[16/10] overflow-hidden group">
-                <img src="./images/top-band.jpg" alt="BEEKOALA" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+            <div class="w-full md:w-2/3 -mx-4 md:mx-0 relative hero-photo-frame bg-gray-200 aspect-[16/10] overflow-hidden group">
+                <img src="./images/top-band.jpg" alt="BEEKOALA" class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700">
                 <div class="absolute inset-0 bg-punk-green opacity-0 group-hover:opacity-10 mix-blend-overlay transition-opacity duration-500"></div>
             </div>
 
@@ -359,43 +375,7 @@
         </div>
     </header>
 
-    <section id="philosophy" class="py-20 px-4 bg-punk-black text-white jagged-border relative">
-        <!-- 背景の透かし文字 -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center opacity-5">
-            <span class="font-street text-[20vw] leading-none text-white whitespace-nowrap">PHILOSOPHY</span>
-        </div>
-        
-        <div class="max-w-4xl mx-auto relative z-10">
-            <div class="flex items-center gap-4 mb-10">
-                <div class="w-12 h-1 bg-punk-green"></div>
-                <h2 class="font-street text-5xl md:text-6xl text-punk-green tracking-wider pt-2">OUR PHILOSOPHY</h2>
-            </div>
-            
-            <div class="bg-white text-punk-black p-8 md:p-12 border-4 border-punk-green solid-shadow-green transform rotate-1">
-                <h3 class="font-bold text-2xl md:text-3xl mb-6 border-b-2 border-punk-black pb-4 inline-block">
-                    俺たちの青春は、まだ終わってない。
-                </h3>
-                <div class="space-y-6 font-medium leading-loose text-lg text-gray-800">
-                    <p>
-                        今から20年前、学生時代に「Beep」としてバンド活動をスタートした。<br>
-                        タカ、ヒガ、ゴー、ノムさん——音楽でつながった仲間たちがいた。
-                    </p>
-                    <p>
-                        卒業、就職を経て、バンドは自然と解散。<br>
-                        それぞれが、それぞれの道を歩き出した。
-                    </p>
-                    <p>
-                        そして20年後——タカの<strong class="bg-punk-green px-1">「またバンドやろうや」</strong>の一言から、再結成が動き出した。<br>
-                        新たな仲間・タダちゃんを迎え、「BEEKOALA」として福岡から再始動する。眠り続けていた名曲たちが、今、また鳴り響く。
-                    </p>
-                </div>
-                <div class="mt-8 flex justify-end">
-                    <span class="font-street text-3xl text-gray-400">WE ARE BEEKOALA</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
+ <!-- メディア -->   
     <section id="media" class="py-20 px-4 bg-gray-50 border-b-4 border-punk-black">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
@@ -442,7 +422,40 @@
             </div>
         </div>
     </section>
+     <!-- ライブ情報 -->  
+    <section id="live" class="py-24 px-4 bg-punk-black text-white jagged-border">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col items-center mb-16">
+                <h2 class="font-street text-6xl md:text-8xl text-punk-green tracking-widest text-center">
+                    LIVE SCHEDULE
+                </h2>
+            </div>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="font-street text-3xl text-punk-green tracking-widest mb-6">NEXT LIVE</h3>
+                    <div id="upcoming-list"></div>
+                </div>
+                <div>
+                    <h3 class="font-street text-3xl text-gray-400 tracking-widest mb-6">LIVE ARCHIVE</h3>
+                    <div id="archive-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- グッズ -->  
+    <section id="goods" class="py-20 px-4 bg-gray-50 border-b-4 border-punk-black">
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white p-8 md:p-12 border-4 border-punk-black solid-shadow text-center">
+                <p class="font-street text-xl text-punk-green tracking-widest mb-3">OFFICIAL GOODS</p>
+                <h2 class="font-street text-4xl md:text-5xl text-punk-black tracking-wider mb-8">SUZURIでグッズ販売中</h2>
+                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="inline-block font-street text-2xl tracking-widest bg-punk-black text-white py-4 px-10 border-2 border-punk-black solid-shadow-green hover:bg-punk-green hover:text-punk-black transition-colors">
+                    SHOP ON SUZURI
+                </a>
+            </div>
+        </div>
+    </section>
+ <!-- メンバー -->   
     <section id="member" class="py-20 px-4 bg-white relative overflow-hidden">
         <!-- ZINE風の装飾テキスト -->
         <div class="absolute -left-10 top-20 transform -rotate-90 origin-left">
@@ -532,35 +545,39 @@
             </div>
         </div>
     </section>
-
-    <section id="goods" class="py-20 px-4 bg-gray-50 border-b-4 border-punk-black">
-        <div class="max-w-3xl mx-auto">
-            <div class="bg-white p-8 md:p-12 border-4 border-punk-black solid-shadow text-center">
-                <p class="font-street text-xl text-punk-green tracking-widest mb-3">OFFICIAL GOODS</p>
-                <h2 class="font-street text-4xl md:text-5xl text-punk-black tracking-wider mb-8">SUZURIでグッズ販売中</h2>
-                <a href="https://suzuri.jp/BEEKOALA" target="_blank" rel="noopener noreferrer" class="inline-block font-street text-2xl tracking-widest bg-punk-black text-white py-4 px-10 border-2 border-punk-black solid-shadow-green hover:bg-punk-green hover:text-punk-black transition-colors">
-                    SHOP ON SUZURI
-                </a>
-            </div>
+<!-- エピソード -->
+    <section id="philosophy" class="py-20 px-4 bg-punk-black text-white jagged-border relative">
+        <!-- 背景の透かし文字 -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-center opacity-5">
+            <span class="font-street text-[20vw] leading-none text-white whitespace-nowrap">PHILOSOPHY</span>
         </div>
-    </section>
-
-    <section id="live" class="py-24 px-4 bg-punk-black text-white jagged-border">
-        <div class="max-w-6xl mx-auto">
-            <div class="flex flex-col items-center mb-16">
-                <h2 class="font-street text-6xl md:text-8xl text-punk-green tracking-widest text-center">
-                    LIVE SCHEDULE
-                </h2>
+        
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="w-12 h-1 bg-punk-green"></div>
+                <h2 class="font-street text-5xl md:text-6xl text-punk-green tracking-wider pt-2">OUR PHILOSOPHY</h2>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="font-street text-3xl text-punk-green tracking-widest mb-6">NEXT LIVE</h3>
-                    <div id="upcoming-list"></div>
+            
+            <div class="bg-white text-punk-black p-8 md:p-12 border-4 border-punk-green solid-shadow-green transform rotate-1">
+                <h3 class="font-bold text-2xl md:text-3xl mb-6 border-b-2 border-punk-black pb-4 inline-block">
+                    俺たちの青春は、まだ終わってない。
+                </h3>
+                <div class="space-y-6 font-medium leading-loose text-lg text-gray-800">
+                    <p>
+                        今から20年前、学生時代に「Beep」としてバンド活動をスタートした。<br>
+                        タカ、ヒガ、ゴー、ノムさん——音楽でつながった仲間たちがいた。
+                    </p>
+                    <p>
+                        卒業、就職を経て、バンドは自然と解散。<br>
+                        それぞれが、それぞれの道を歩き出した。
+                    </p>
+                    <p>
+                        そして20年後——タカの<strong class="bg-punk-green px-1">「またバンドやろうや」</strong>の一言から、再結成が動き出した。<br>
+                        新たな仲間・タダちゃんを迎え、「BEEKOALA」として福岡から再始動する。眠り続けていた名曲たちが、今、また鳴り響く。
+                    </p>
                 </div>
-                <div>
-                    <h3 class="font-street text-3xl text-gray-400 tracking-widest mb-6">LIVE ARCHIVE</h3>
-                    <div id="archive-list"></div>
+                <div class="mt-8 flex justify-end">
+                    <span class="font-street text-3xl text-gray-400">WE ARE BEEKOALA</span>
                 </div>
             </div>
         </div>
